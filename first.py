@@ -1,6 +1,11 @@
+import math
+
 # practice python
 # exercise 1
 # *************************************
+
+
+
 def date_slicer(date):
     year = date[0:4]
     month = date[5:7]
@@ -55,4 +60,32 @@ def smallerNumbersThanCurrent(arr):
          count += 1
     output.append(count)
   return output
-print(smallerNumbersThanCurrent([7,7,7,7]))
+# print(smallerNumbersThanCurrent([7,7,7,7]))
+# lambda
+area = lambda width, height:width * height
+# print(area(3,4))
+
+# exercise 6
+# ***************************************
+def solveQuadraticEquation(a,b,c):
+    # calculating the discriminant
+    discriminant = b**2 - 4*a*c
+    if discriminant > 0:
+        # two real solution
+        x1 = (-b + (math.sqrt(discriminant))) / 2*a
+        x2 = (-b - (math.sqrt(discriminant))) / 2*a
+        return f"The two real solutions are {x1} and {x2}."
+    elif discriminant == 0:
+        # one real solution
+        x = -b / 2*a
+        return f"The only real solution is {x}"
+    else:
+        # Two complex solutions
+        real_part = -b / 2*a
+        imaginary_part = math.sqrt(-discriminant) / (2*a)
+        return f"Two complex solutions {real_part} + {imaginary_part}i and {real_part} - {imaginary_part}i"
+# print(solveQuadraticEquation(1,5,4))
+ans = 1
+for i in range(1,6):
+    ans *= i
+print(ans)
