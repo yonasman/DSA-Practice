@@ -85,7 +85,91 @@ def solveQuadraticEquation(a,b,c):
         imaginary_part = math.sqrt(-discriminant) / (2*a)
         return f"Two complex solutions {real_part} + {imaginary_part}i and {real_part} - {imaginary_part}i"
 # print(solveQuadraticEquation(1,5,4))
-ans = 1
-for i in range(1,6):
-    ans *= i
-print(ans)
+# exercise 8
+# **************************************
+# fibonacci
+def fibonacci():
+    first = 0
+    second = 1
+    i = 0
+    print(first)
+    print(second)
+    while(i < 10):
+        next = first + second
+        first = second
+        second = next
+        i = i + 1
+        print(next)
+        
+# fibonacci()
+# print(0)
+# print(1)
+def rec_fibonacci(count, first_prev,sec_prev):
+    if(count < 19):
+        next = first_prev + sec_prev
+        first_prev = sec_prev
+        sec_prev = next
+        print(next)
+        count += 1
+        rec_fibonacci(count,first_prev,sec_prev)
+    else:
+        return
+# rec_fibonacci(2,0,1)
+# linear search
+def linear_search(arr,target):
+    for item in arr:
+        if(item == target):
+            return True
+    return False
+# print(linear_search([1,2,3,4,5],0))
+# bubble sort
+def bubble_sort(arr):
+    n = len(arr)
+    # 5
+    for i in range(n):
+        # 0,1,2,3,4
+        for j in range(n-i-1):
+            # 4,3,2,1,0
+            if(arr[j] > arr[j + 1]):
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+    return arr
+# print(bubble_sort([10,1,6,3,7]))
+# timed bubble sort
+from time import time
+def timed_bubble_sort(arr):
+    start = time()
+    print(bubble_sort(arr))
+    end = time()
+    print(f"elapsed time {end - start} secs")
+# timed_bubble_sort([1,3,2,9,5,6,7,4,4,7,9,1,2,3,4,5,5])
+"""Write a function to find the longest common prefix string amongst an array of strings.
+
+If there is no common prefix, return an empty string "".
+
+Example 1:
+
+Input: strs = ["flower","flow","flight"]
+Output: "fl"
+Example 2:
+
+Input: strs = ["dog","racecar","car"]
+Output: ""
+Explanation: There is no common prefix among the input strings. 
+
+"""
+# pseudo code
+def common_prefix(strs):
+    if not strs:
+        return ""
+    # set prefix to first string
+    prefix = strs[0]
+    for str in strs[1:]:
+        while not str.startswith(prefix):
+            # reduce the prefix by one last char
+            prefix = prefix[:-1]
+            # if prefix become empty return ""
+            if not prefix:
+                return ""
+    return prefix
+print(common_prefix(["flower","flow","flight"]))
+            
