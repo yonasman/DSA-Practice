@@ -171,5 +171,44 @@ def common_prefix(strs):
             if not prefix:
                 return ""
     return prefix
-print(common_prefix(["flower","flow","flight"]))
-            
+# print(common_prefix(["flower","flow","flight"]))
+#  Remove Duplicates from Sorted Array
+# def remove_duplicates(nums):
+#     new_arr = []
+#     # number of unique numbers
+#     k = 0
+#     for num in nums:
+#         if num not in new_arr:
+#             new_arr.append(num)
+#             k += 1
+#     return k
+# print(remove_duplicates([1,1,2]))
+def removeDuplicates(nums):
+    if not nums:
+        return 0
+    # initialize the first pointer to track the place of unique elements
+    k = 1
+    for i in range(1,len(nums)):
+        # 1,2
+        if(nums[i] != nums[i - 1]):
+            # place the current element in the k-th position
+            nums[k] = nums[i]
+            # increment unique elements count
+            k += 1
+    return k
+# print(removeDuplicates([0,0,1,1,1,2,2,3,3,4]))
+"""Example 1: Two Sum II - Input Array Is Sorted
+Problem: Given an array of integers numbers that is already sorted in non-decreasing order, find two numbers such that they add up to a specific target number. Return the indices of the two numbers."""
+def two_sum(nums,target):
+    # initialize the two pointers to start and end element
+    left,right = 0,len(nums) - 1
+    while left < right:
+        current_sum = nums[left] + nums[right]
+        if current_sum == target:
+            return f"index of the two elements is {left} and {right}"
+        elif current_sum < target:
+            left += 1
+        else:
+            right -= 1
+print(two_sum([1,2,3,4,5,6],7))
+    
