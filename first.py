@@ -210,5 +210,87 @@ def two_sum(nums,target):
             left += 1
         else:
             right -= 1
-print(two_sum([1,2,3,4,5,6],7))
-    
+# print(two_sum([6,2,3,4,5,6],7))
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n - 1):
+        for j in range(n - i - 1):
+            if(arr[j] > arr[j + 1]):
+                arr[j],arr[j+1] = arr[j+1],arr[j]
+    return arr
+# print(bubble_sort([1,2,3,4,5]))
+# best case
+def best_bubble_sort(arr):
+    n = len(arr) - 1
+    for j in range(n):
+        if not swapped:
+            break
+        swapped = False
+        for i in range(1,n - j):
+            if(arr[i] > arr[i + 1]):
+                arr[i],arr[i+1] = arr[i+1],arr[i]
+                swapped = True
+    return arr
+# print(bubble_sort([3,4,5,1,2]))
+def selection_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        minIdx = i
+        for j in range(i + 1,n):
+            if arr[j] < arr[minIdx]:
+                minIdx = j
+        arr[i],arr[minIdx] = arr[minIdx],arr[i]
+    return arr
+# print(selection_sort([3,4,5,2,1,2]))
+def insertion_sort(arr):
+    n = len(arr)
+    for i in range(1,n):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and key < arr[j]:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key
+    return arr
+# print(insertion_sort([5,3,1,4]))
+# count sort
+def count_sort(arr):
+    min_val = min(arr)
+    max_val = max(arr)
+    count_range = max_val - min_val  + 1
+    # initialize count array
+    count_arr = [0] * count_range
+    # count occurrence of each value
+    for num in arr:
+        count_arr[num- min_val] += 1
+    # accumulate counts
+    for i in range(1,len(count_arr)):
+        count_arr[i] += count_arr[i - 1]
+    # output array
+    output = [0] * len(arr)
+    for num in reversed(arr):
+        output[count_arr[num - min_val] - 1] = num
+        count_arr[num - min_val] -= 1
+    return output
+# print(count_sort([2,1,3,4,4,5]))
+"""
+Given a shuffled sentence s containing no more than 9 words, reconstruct and return the original sentence.
+
+Example 1:
+
+Input: s = "is2 sentence4 This1 a3"
+Output: "This is a sentence"
+Explanation: Sort the words in s to their original positions "This1 is2 a3 sentence4", then remove the numbers.
+"""
+def original_sentence(str):
+    str = str.split(" ")
+    n = len(str)
+    for i in range(n - 1):
+        # print(str[i])
+        for j in range(n - i - 1):
+            if(int(str[j][-1]) > int(str[j + 1][-1])):
+                str[j],str[j+1] = str[j+1],str[j]
+    str = [s[:-1] for s in str]
+    return " ".join(str)
+# print(original_sentence("is2 sentence4 This1 a3"))
+
