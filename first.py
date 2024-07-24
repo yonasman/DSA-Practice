@@ -294,3 +294,96 @@ def original_sentence(str):
     return " ".join(str)
 # print(original_sentence("is2 sentence4 This1 a3"))
 
+def watermelon(w):
+    if w % 2 == 0 and w >= 4:
+        print("YES")
+    else:
+        print("NO")
+def distinct(count, nums):
+    k = 1
+    for i in range(1,len(nums)):
+         if(nums[i] != nums[i - 1]):
+             nums[k] = nums[i]
+             k += 1
+    return k
+    
+# print(distinct(5,
+def sum_two(arr, result):
+    for i in range(len(arr)):
+        for j in range(1,len(arr)):
+            if(arr[i] + arr[j] == result):
+                return f"{i} and {j}"
+# print(sum_two([2,7,5,1],8))
+# Widest Vertical Area Between Two Points Containing No Points
+# pseudo code
+# sort
+
+# answer
+
+def widest_vertical_area(points):
+    n = len(points) - 1
+    for i in range(n):
+        for j in range(n - i):
+            if(points[j][0] > points[j+1][0]):
+                points[j], points[j+1] = points[j+1], points[j]
+    widest_area = 0           
+    for i in range(n - 1):
+        if(points[i + 1][0] - points[i][0] > widest_area):
+            widest_area = points[i + 1][0] - points[i][0]
+    return widest_area
+# print(widest_vertical_area([[3,1],[9,0],[1,0],[1,4],[5,3],[8,8]]))
+"""
+You are given a 0-indexed integer array nums of even length and there is also an empty array arr. Alice and Bob decided to play a game where in every round Alice and Bob will do one move. The rules of the game are as follows:
+
+Every round, first Alice will remove the minimum element from nums, and then Bob does the same.
+Now, first Bob will append the removed element in the array arr, and then Alice does the same.
+The game continues until nums becomes empty.
+Return the resulting array arr.
+
+Example 1:
+
+Input: nums = [5,4,2,3]
+[2,3,4,5]
+Output: [3,2,5,4]
+"""
+def number_game(nums):
+    nums.sort()
+    n = len(nums)
+    new_arr = []
+    # 0,1
+    for i in range(0,n,2):
+        if i + 1 < n:
+            A = nums[i]
+            B = nums[i+1]
+            new_arr.append(B)
+            new_arr.append(A)
+    return new_arr
+# print(number_game([5,4,2,3]))
+"""
+You are given a 0-indexed integer array nums and a target element target.
+
+A target index is an index i such that nums[i] == target.
+
+Return a list of the target indices of nums after sorting nums in non-decreasing order. If there are no target indices, return an empty list. The returned list must be sorted in increasing order.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,5,2,3], target = 2
+Output: [1,2]
+Explanation: After sorting, nums is [1,2,2,3,5].
+The indices where nums[i] == 2 are 1 and 2.
+"""
+# pseudo code
+# 1- define a func named find_target_index that takes arr as a param
+# iterate and find the index of target element
+# return a list of index
+def find_target_index(nums,target):
+    n = len(nums)
+    new_arr = []
+    for i in range(n):
+        if(nums[i] == target):
+            new_arr.append(i)
+    return new_arr
+print(find_target_index([1,2,5,2,3],5))
