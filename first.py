@@ -452,4 +452,93 @@ def array_merged(arr1, arr2):
         merged_arr.arr2[j]
         j += 1
     return merged_arr
-print(array_merged([1,2,3,4,7], [2,3,4,5,6]))
+# print(array_merged([1,2,3,4,7], [2,3,4,5,6]))
+"""
+You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
+
+Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+
+The final sorted array should not be returned by the function, but instead be stored inside the array nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of n.
+
+ 
+
+Example 1:
+Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+Output: [1,2,2,3,5,6]
+Explanation: The arrays we are merging are [1,2,3] and [2,5,6].
+The result of the merge is [1,2,2,3,5,6] with the underlined elements coming from nums1.
+Example 2:
+
+Input: nums1 = [1], m = 1, nums2 = [], n = 0
+Output: [1]
+Explanation: The arrays we are merging are [1] and [].
+The result of the merge is [1].
+Example 3:
+
+Input: nums1 = [0], m = 0, nums2 = [1], n = 1
+Output: [1]
+Explanation: The arrays we are merging are [] and [1].
+The result of the merge is [1].
+Note that because m = 0, there are no elements in nums1. The 0 is only there to ensure the merge result can fit in nums1.
+"""
+# pseudo code
+def merge(nums1,nums2,m,n):
+    p1 = m - 1
+    p2 = n - 1
+    p = n + m - 1 
+    while(p1 >= 0 and p2 >= 0):
+        if nums1[p1] > nums2[p2]:
+            nums1[p] = nums1[p1]
+            p1 -= 1
+        else:
+            nums1[p] = nums2[p2]
+            p2 -= 1
+        p -= 1
+    # if there are remaining elements in nums2
+    while(p2 >= 0):
+        nums1[p] = nums2[p2]
+        p2 -= 1
+        p -= 1
+    return nums1
+# print(merge(nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3))
+"""
+Given an n x n binary matrix image, flip the image horizontally, then invert it, and return the resulting image.
+
+To flip an image horizontally means that each row of the image is reversed.
+
+For example, flipping [1,1,0] horizontally results in [0,1,1].
+To invert an image means that each 0 is replaced by 1, and each 1 is replaced by 0.
+
+For example, inverting [0,1,1] results in [1,0,0].
+"""
+image = [[1,1,0],[1,0,1],[0,0,0]]
+[[0,1,1],[1,0,1],[0,0,0]]
+[[1,0,0],[0,1,0],[1,1,1]]
+[[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]
+# [[0011],[0110],[1,0,0,0],[0,1,0,1]]
+# brute force
+def flipAndInvertImage1(image):
+    for i in range(len(image)):
+        n = len(image[i]) - 1
+        for j in range((n+1) // 2):
+            image[i][j],image[i][n - j] = image[i][n - j],image[i][j]
+            # invert
+            image[i][j] = 1 - image[i][j]
+            # not invert same element twice
+            if j != n - j:
+                image[i][n - j] = 1 - image[i][n - j]
+    return image
+# print(flipAndInvertImage1([[1,1,0,0],[1,0,0,1],[0,1,1,1],[1,0,1,0]]))
+# print(flipAndInvertImage1(image))
+def flipAndInvertImage(image):
+    
+    for i in range(len(image)):
+        p1,p2 = 0, len(image[i]) - 1
+        while(p1 <= p2):
+            image[i][p1],image[i][p2] = 1- image[i][p2],1 - image[i][p1]
+            p1 += 1
+            p2 -= 1
+            
+    return image
+# print(flipAndInvertImage([[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]))
+print(flipAndInvertImage(image))
