@@ -418,3 +418,38 @@ def findContentChildren(g,s):
         j += 1
     return content
 # print(findContentChildren([1,2,3],[]))
+
+# *************
+# merge two sorted arrays
+arr1,arr2 = [1,2,3,4,7], [2,3,4,5,6]
+# brute force approach
+def merger(arr1,arr2):
+    merged = []
+    for i in range(len(arr1)):
+        merged.append(arr1[i])
+    for j in range(len(arr2)):
+        merged.append(arr2[j])
+    merged.sort()
+    return merged
+# print(merger(arr1, arr2))
+
+# using two pointers
+def array_merged(arr1, arr2):
+    i,j = 0,0
+    merged_arr = []
+    while(i < len(arr1) and j < len(arr2)):
+        if(arr1[i] < arr2[j]):
+            merged_arr.append(arr1[i])
+            i += 1
+        else:
+            merged_arr.append(arr2[j])
+            j += 1
+    # if there are any remaining elements
+    while(i < len(arr1)):
+        merged_arr.append(arr1[i])
+        i += 1
+    while(j < len(arr2)):
+        merged_arr.arr2[j]
+        j += 1
+    return merged_arr
+print(array_merged([1,2,3,4,7], [2,3,4,5,6]))
