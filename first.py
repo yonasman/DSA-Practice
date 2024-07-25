@@ -609,4 +609,42 @@ def moveZeroes(nums):
             nums[non_zero_index],nums[i] = nums[i],nums[non_zero_index]
             non_zero_index += 1
     return nums
-print(moveZeroes([0,1,0,3,12]))
+# print(moveZeroes([0,1,0,3,12]))
+"""
+2396. Strictly Palindromic Number
+Medium
+
+613
+
+1560
+
+Add to List
+
+Share
+An integer n is strictly palindromic if, for every base b between 2 and n - 2 (inclusive), the string representation of the integer n in base b is palindromic.
+
+Given an integer n, return true if n is strictly palindromic and false otherwise.
+
+A string is palindromic if it reads the same forward and backward.
+"""
+def isStrictlyPalindromic(n):
+    
+    for base in range(2,n-1):
+        str_bin = ""
+        num = n
+        while num:
+            str_bin = str(num % base) + str_bin
+            num = num // base
+    #     if(str_bin != str_bin[::-1]):
+    #         return False
+    # return True
+            p1,p2 = 0,len(str_bin) - 1
+            while(p1 < p2):
+                print(p1)
+                print(p2)
+                if str_bin[p1] != str_bin[p2]:
+                    return False
+                p1 += 1
+                p2 -= 1
+    return True
+# print(isStrictlyPalindromic(9))
