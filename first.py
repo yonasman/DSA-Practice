@@ -585,4 +585,28 @@ def applyOperations(nums):
             nums[non_zero_index],nums[i] = nums[i],nums[non_zero_index]
             non_zero_index += 1
     return nums
-print(applyOperations([847,847,0,0,0,399,416,416,879,879,206,206,206,272]))
+# print(applyOperations([847,847,0,0,0,399,416,416,879,879,206,206,206,272]))
+# move zeros
+"""
+283. Move Zeroes
+Easy
+
+16730
+
+461
+
+Add to List
+
+Share
+Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+Note that you must do this in-place without making a copy of the array.
+"""
+def moveZeroes(nums):
+    non_zero_index = 0
+    for i in range(len(nums)):
+        if(nums[i] != 0):
+            nums[non_zero_index],nums[i] = nums[i],nums[non_zero_index]
+            non_zero_index += 1
+    return nums
+print(moveZeroes([0,1,0,3,12]))
