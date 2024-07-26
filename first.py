@@ -681,4 +681,31 @@ def sortColors(nums):
     return nums
 
 # print(sortColors([2,0,2,1,1,0]))
-    
+# Problem: Find the maximum sum of any subarray of size k in a given array.
+
+# brute force
+def maxSumSubArray(arr,k):
+    n = len(arr)
+    window_sum = sum(arr[:k])
+    max_sum = window_sum
+    for i in range(n - k):
+        window_sum = window_sum - arr[i] + arr[i + k]
+        max_sum = max(max_sum,window_sum)
+    return max_sum
+print(maxSumSubArray([2, 1, 5, 1, 3, 2],3))
+# Problem: Find the length of the smallest sub array with a sum greater than or equal to S.
+
+
+def lenOfSmallestSubArray(arr,s):
+    p1 = 0
+    n = len(arr)
+    min_len = float("inf")
+    current_sum = 0
+    for p2 in range(n):
+        current_sum += arr[p2]
+        while(current_sum >= s):
+            min_len = min(min_len,p2 - p1 + 1)
+            current_sum -= arr[p1]
+            p1 += 1
+    return min_len if min_len != "inf" else 0
+print(lenOfSmallestSubArray([2, 1, 5, 1, 3, 2],7))
