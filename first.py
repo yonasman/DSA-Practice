@@ -692,9 +692,19 @@ def maxSumSubArray(arr,k):
         window_sum = window_sum - arr[i] + arr[i + k]
         max_sum = max(max_sum,window_sum)
     return max_sum
-print(maxSumSubArray([2, 1, 5, 1, 3, 2],3))
+# print(maxSumSubArray([2, 1, 5, 1, 3, 2],3))
+# brute force approach
+# [2, 1, 5, 1, 3, 2],3
+def max_sum(arr,k):
+    max_sum = sum(arr[:k])
+    for i in range(len(arr)- k + 1):
+        current_sum = 0
+        for j in range(i,k + i):
+            current_sum += arr[j]
+        max_sum = max(current_sum,max_sum)
+    return max_sum
+# print(max_sum([2, 1, 5, 1, 3, 2],3))
 # Problem: Find the length of the smallest sub array with a sum greater than or equal to S.
-
 
 def lenOfSmallestSubArray(arr,s):
     p1 = 0
@@ -708,4 +718,32 @@ def lenOfSmallestSubArray(arr,s):
             current_sum -= arr[p1]
             p1 += 1
     return min_len if min_len != "inf" else 0
-print(lenOfSmallestSubArray([2, 1, 5, 1, 3, 2],7))
+# print(lenOfSmallestSubArray([2, 1, 5, 1, 3, 2],7))
+
+# ************************************************
+def gcf(num1,num2):
+    if num2 > num1:
+        smaller = num1
+    else:
+        smaller = num2
+    cf = 0
+    for i in range(1,smaller + 1):
+        if num1 % i == 0 and num2 % i == 0:
+            cf = i
+    return cf
+# print(gcf(48,18))
+def GCF1(num1,num2):
+    if num2 > num1:
+        smaller = num1
+        larger = num2
+    else:
+        smaller = num2
+        larger = num1
+    while(larger):
+        smaller,larger = larger,smaller % larger
+    return smaller
+# print(GCF1(4,8))
+ans = 5 
+for i in range(1): 
+         ans *= 5
+print(ans)
