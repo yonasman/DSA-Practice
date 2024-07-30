@@ -110,4 +110,82 @@ def sortDuplicates(nums):
                 min_idx = j
         nums[i],nums[min_idx] = nums[min_idx],nums[i]
     return nums
-print(sortDuplicates([5, 1, 3, 5, 2, 1]))
+# print(sortDuplicates([5, 1, 3, 5, 2, 1]))
+def sum_upto_middle(nums):
+    n = len(nums)
+    mid = n // 2 + 1
+    prefix = [0] * mid
+    prefix[0] = nums[0]
+    for i in range(1,mid ):
+        prefix[i] = prefix[i - 1] + nums[i]
+    return prefix
+# print(sum_upto_middle([1,2,3,4,5]))
+# counting sort
+def countingSort(nums):
+    n = len(nums)
+    min_num = min(nums)
+    max_num = max(nums) 
+    idx_range =  max_num - min_num + 1
+    count_array = [0] * idx_range
+    output = [0] * idx_range
+    
+    for num in nums:
+        count_array[num - min_num] += 1
+
+    for i in range(1,n):
+        count_array[i] += count_array[i - 1]
+    
+    for num in nums:
+        count_array[num - min_num] -= 1
+        output[count_array[num - min_num]] = num
+    return output
+# print(countingSort([1,4,1,2,7,5,2]))
+
+# leet code
+def sortPeople(names, heights):
+        n = len(heights)
+        max_hgt = max(heights)
+        count_arr = [0] * (max_hgt + 1)
+        
+        for h in heights:
+            count_arr[h] += 1
+            
+        for i in range(1,max_hgt + 1):
+            count_arr[i] += count_arr[i - 1]
+        
+        output_names = [0] * n
+        output_heights = [0] * n
+        
+        i = n - 1
+        
+        while(i >= 0):
+            h = heights[i]
+            pos = count_arr[h] - 1
+            output_heights[pos] = h
+            output_names[pos] = names[i]
+            count_arr[h] -= 1
+            i -= 1
+        output_names.reverse()
+        return output_names
+print(sortPeople(names = ["Mary","John","Emma"], heights = [180,165,170]))
+# names = ["Mary","John","Emma"], heights = [180,165,170]
+def cS(nums):
+    n = len(nums)
+    max_num = max(nums)
+    count = [0] * (max_num + 1)
+    
+    for num in nums:
+        count[num] += 1
+    
+    for i in range(1,max_num + 1):
+        count[i] += count[i - 1]
+    
+    output = [0] * n
+    i = n - 1
+    # 6
+    while(i >= 0):
+        output[count[nums[i]] - 1] = nums[i]
+        count[nums[i]] -= 1
+        i -= 1
+    return output
+# print(cS([180,165,170]))
