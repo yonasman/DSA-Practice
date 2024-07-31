@@ -167,7 +167,7 @@ def sortPeople(names, heights):
             i -= 1
         output_names.reverse()
         return output_names
-print(sortPeople(names = ["Mary","John","Emma"], heights = [180,165,170]))
+# print(sortPeople(names = ["Mary","John","Emma"], heights = [180,165,170]))
 # names = ["Mary","John","Emma"], heights = [180,165,170]
 def cS(nums):
     n = len(nums)
@@ -189,3 +189,28 @@ def cS(nums):
         i -= 1
     return output
 # print(cS([180,165,170]))
+# ***********************
+# prefix sum
+# ***********************
+"""1. Calculate the Sum:
+ - Calculate the sum of the elements between the first and middle index for
+the following array:
+ `nums = [1, 13, 14, 76, 89, 100, 34]`"""
+def sumUpToMiddle(nums):
+    n = len(nums)
+    mid = n // 2 + 1
+    sum = 0
+    for i in range(mid):
+        sum += nums[i]
+    return sum
+# print(sumUpToMiddle([1,2,3]))
+class NumArray:
+    def sumToMid(self,nums):
+        n = len(nums)
+        mid = n // 2 + 1
+        sum = 0
+        for i in range(mid):
+            sum += nums[i]
+        return sum
+n = NumArray()
+# print(n.sumToMid([1,2,3]))
