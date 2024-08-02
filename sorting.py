@@ -214,3 +214,158 @@ class NumArray:
         return sum
 n = NumArray()
 # print(n.sumToMid([1,2,3]))
+"""1637. Widest Vertical Area Between Two Points Containing No Points
+Easy
+
+932
+
+1722
+
+Add to List
+
+Share
+Given n points on a 2D plane where points[i] = [xi, yi], Return the widest vertical area between two points such that no points are inside the area.
+
+A vertical area is an area of fixed-width extending infinitely along the y-axis (i.e., infinite height). The widest vertical area is the one with the maximum width.
+
+Note that points on the edge of a vertical area are not considered included in the area."""
+def maxWidthOfVerticalArea(points):
+        n = len(points)
+        # sort the array
+        points.sort()
+        #  calculating the max vertical width
+        widest_vert_area = 0
+        for i in range(n - 1):
+            current_width = points[i + 1][0] - points[i][0]
+            widest_vert_area = max(widest_vert_area,current_width)
+        return widest_vert_area 
+# print(maxWidthOfVerticalArea([[3,1],[9,0],[1,0],[1,4],[5,3],[8,8]]))
+
+"""
+2974. Minimum Number Game
+Easy
+
+223
+
+16
+
+Add to List
+
+Share
+You are given a 0-indexed integer array nums of even length and there is also an empty array arr. Alice and Bob decided to play a game where in every round Alice and Bob will do one move. The rules of the game are as follows:
+
+Every round, first Alice will remove the minimum element from nums, and then Bob does the same.
+Now, first Bob will append the removed element in the array arr, and then Alice does the same.
+The game continues until nums becomes empty.
+Return the resulting array arr.
+"""
+def numberGame(nums):
+    n = len(nums)
+    for i in range(n):
+        min_idx = i
+        for j in range(i+1,n):
+            if(nums[j] < nums[min_idx]):
+                nums[min_idx],nums[j] = nums[j], nums[min_idx]
+    output = []
+    for i in range(0,n,2):
+        if i + 1 < n:
+            a = nums[i]
+            b = nums[i + 1]
+            output.append(b)
+            output.append(a)
+    return output
+# print(numberGame([2,5]))
+"""
+1859. Sorting the Sentence
+Easy
+
+2189
+
+78
+
+Add to List
+
+Share
+A sentence is a list of words that are separated by a single space with no leading or trailing spaces. Each word consists of lowercase and uppercase English letters.
+
+A sentence can be shuffled by appending the 1-indexed word position to each word then rearranging the words in the sentence.
+
+For example, the sentence "This is a sentence" can be shuffled as "sentence4 a3 is2 This1" or "is2 sentence4 This1 a3".
+Given a shuffled sentence s containing no more than 9 words, reconstruct and return the original sentence.
+"""
+def sortSentence(sent):
+    word_list = sent.split(" ")
+    n = len(word_list)
+    for i in range(n):
+        min_idx = i
+        for j in range(i+1,n):
+            if int(word_list[j][-1]) < int(word_list[min_idx][-1]):
+                word_list[j],word_list[min_idx] = word_list[min_idx],word_list[j]
+    cleaned_words = [word[:-1] for word in word_list]
+    return " ".join(cleaned_words)
+# print(sortSentence("is2 sentence4 This1 a3"))
+"""
+2089. Find Target Indices After Sorting Array
+Easy
+
+1790
+
+92
+
+Add to List
+
+Share
+You are given a 0-indexed integer array nums and a target element target.
+
+A target index is an index i such that nums[i] == target.
+
+Return a list of the target indices of nums after sorting nums in non-decreasing order. If there are no target indices, return an empty list. The returned list must be sorted in increasing order.
+"""
+# def targetIndices(nums):
+#     n = len(nums)
+#     min_val = min(nums)
+#     max_val = max(nums)
+#     range_val =  max_val - min_val + 1
+#     count = [0] * (range_val)
+    
+#     for n in nums:
+#         count[n - min_val] += 1
+#     for i in range(1,range_val):
+#         count[i] += count[i - 1]
+    
+#     output = [0] * n
+#     for j in range(n):
+#         index = count[nums[j] - min_val] - 1
+#         output[index] = nums[j]
+#         count[nums[j] -  min_val] -= 1
+#     return output
+def targetIndices(nums,target):
+    n = len(nums)
+    min_val = min(nums)
+    max_val = max(nums)
+    range_val = max_val - min_val + 1
+    count = [0] * range_val
+    
+    # Count the occurrences of each number
+    for num in nums:  
+        count[num - min_val] += 1
+    
+    # Update the count array to store the cumulative counts
+    for i in range(1, range_val):
+        count[i] += count[i - 1]
+    
+    sorted_arr = [0] * n
+    
+    # Place the elements in sorted order
+    for j in range(n):
+        index = count[nums[j] - min_val] - 1  # Subtract 1 for zero-based index
+        sorted_arr[index] = nums[j]
+        count[nums[j] - min_val] -= 1
+    output = []
+    for i in range(n):
+        if sorted_arr[i] == target:
+            output.append(i)
+    return output
+print(targetIndices(nums = [1,2,5,2,3], target = 3))  # Expected Output: [1, 2, 3, 4]
+
+    
