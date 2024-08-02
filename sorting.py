@@ -366,6 +366,77 @@ def targetIndices(nums,target):
         if sorted_arr[i] == target:
             output.append(i)
     return output
-print(targetIndices(nums = [1,2,5,2,3], target = 3))  # Expected Output: [1, 2, 3, 4]
+# print(targetIndices(nums = [1,2,5,2,3], target = 3))  # Expected Output: [1, 2, 3, 4]
+"""
+455. Assign Cookies
+Easy
 
-    
+3945
+
+374
+
+Add to List
+
+Share
+Assume you are an awesome parent and want to give your children some cookies. But, you should give each child at most one cookie.
+
+Each child i has a greed factor g[i], which is the minimum size of a cookie that the child will be content with; and each cookie j has a size s[j]. If s[j] >= g[i], we can assign the cookie j to the child i, and the child i will be content. Your goal is to maximize the number of your content children and output the maximum number.
+"""
+def findContentChildren(g,s):
+    g.sort()
+    s.sort()
+    contented_children,i,j = 0,0,0
+    while(i < len(g) and j < len(s)):
+        if s[j] >= g[i]:
+            contented_children += 1
+            i += 1
+        j += 1
+    return contented_children
+# print(findContentChildren(g = [1,2,3], s = [3]))
+def merge(num1,m,num2,n):
+    p1,p2 = m - 1,n - 1
+    p = n + m
+    while(p1 >= 0 and p2 >= 0):
+        if num1[p1] < num2[p2]:
+            num1[p] = num1[p1]
+            p1 -= 1
+        else:
+            num1[p] = num1[p2]
+            p2 -= 1
+        p -= 1
+    while(p2 >= 0):
+        num1[p] = num1[p2]
+        p2 -= 1
+        p -= 1
+    return num1
+# print(merge(num1 = [1], m = 1, num2 = [], n = 0))
+# sort vowels
+def sortVowels(s):
+        s = list(s)
+        n = len(s)
+        v = "aeuioAOUIE"
+        for i in range(n):
+            if(s[i] in v or s[i].upper() in v):
+                print(s[i])
+                for j in range(i,n):
+                    if(s[j] in v or s[j].upper() in v):
+                        if(s[i] > s[j]):
+                            s[i],s[j] = s[j],s[i]
+        return "".join(s)
+# print(sortVowels("SrSuArHDvA"))
+def sortVowel(string):
+    n = len(string)
+    v = "aeuioAOUIE"
+    vowels = []
+    for s in string:
+        if s in v:
+            vowels.append(s)
+    vowels.sort()
+    s = list(string)
+    vowel_idx = 0
+    for i in range(len(s)):
+        if s[i] in v:
+            s[i] = vowels[vowel_idx]
+            vowel_idx += 1
+    return "".join(s)
+print(sortVowel("SrSuArHDvA"))
