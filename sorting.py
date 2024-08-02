@@ -439,4 +439,16 @@ def sortVowel(string):
             s[i] = vowels[vowel_idx]
             vowel_idx += 1
     return "".join(s)
-print(sortVowel("SrSuArHDvA"))
+# print(sortVowel("SrSuArHDvA"))
+def pivotIndex( nums):
+        n = len(nums)
+        for p1 in  range(n):
+            sum_to_p1 = sum(nums[:p1])
+            for p2 in range(p1,n):
+                if sum_to_p1 == sum(nums[p1+ 1:n]):
+                    return p1
+                else:
+                    p2 += 1
+            p1 +=1
+        return -1
+# print(pivotIndex([1,2,3]))
