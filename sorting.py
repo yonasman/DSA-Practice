@@ -501,4 +501,68 @@ def mergeArr(nums1,m,nums2,n):
         p2 -= 1
         p -= 1
     return nums1
-print(mergeArr(nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3))
+# print(mergeArr(nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3))
+
+def merge_arrays(nums1,nums2):
+    n = len(nums1)
+    m = len(nums2)
+    # p1,p2,p = n - 1,m - 1, m + n -1
+    p1,p2 = 0,0
+    # output
+    output = []
+    while p1 < n and p2 < m:
+        if nums1[p1] < nums2[p2]:
+            output.append(nums1[p1])
+            p1 += 1
+        else:
+            output.append(nums2[p2])
+            p2 += 1
+        p += 1
+    while(p2 < m):
+        output.append(nums2[p2])
+        p2 += 1
+    return output
+# print(merge_arrays(nums1 = [1,2,3], nums2 = [2,5,6]))
+
+# Problem: Given a sorted array of integers, find two numbers that add up to a given target.
+
+def target_sum(nums,target):
+    # p1,p2 = 0,p1 + 1
+    n = len(nums)
+    # output
+    output = []
+    for p1 in range(n):
+        for p2 in range(p1 + 1,n):
+            if nums[p1] + nums[p2] == target:
+                output.append(nums[p1])
+                output.append(nums[p2])
+    return output
+# print(target_sum([1,2,3,4,5],0))
+def find_target_pairs(nums,target):
+    n = len(nums)
+    left,right = 0,n - 1
+    while left < right:
+        current_sum = nums[left] + nums[right]
+        if current_sum == target:
+            return([nums[left],nums[right] ])
+        elif current_sum < target:
+            left += 1
+        else:
+            right -= 1
+    return None
+# print(find_target_pairs([1,2,3,4,5],6))
+
+# Problem: Given a sorted array, remove the duplicates in place and return the new length of the array.
+# [1,2,3,3,4]
+def removeDuplicates(nums):
+    n = len(nums)
+    if not nums:
+        return 0
+    p1 = 0
+    for p2 in range(1,n):
+        if nums[p1] != nums[p2]:
+            p1 += 1
+            nums[p1] = nums[p2]
+            
+    return len(nums[:p1 + 1])
+# print(removeDuplicates([1,2,3,3,4]))
