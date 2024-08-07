@@ -566,3 +566,26 @@ def removeDuplicates(nums):
             
     return len(nums[:p1 + 1])
 # print(removeDuplicates([1,2,3,3,4]))
+def flipAndInvertImage(image):
+    for img in image:
+        p1 = 0
+        p2 = len(img) - 1
+        while(p1 <= p2): 
+            img[p1], img[p2] = 1- img[p2],1- img[p1]
+            p1 += 1
+            p2 -= 1
+    return image
+# print(flipAndInvertImage([[1,1,0],[1,0,1],[0,0,0]]))
+def applyOperations(nums):
+    n = len(nums)
+    for i in range(1,n):
+        if nums[i] == nums[i - 1]:
+            nums[i] = 0
+            nums[i - 1] *=2
+    p1 = 0
+    for i in range(n):
+        if nums[i] != 0:
+            nums[p1],nums[i] = nums[i],nums[p1]
+            p1 += 1
+    return nums
+print(applyOperations([1,2,2,1,1,0]))
