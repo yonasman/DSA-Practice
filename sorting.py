@@ -588,4 +588,76 @@ def applyOperations(nums):
             nums[p1],nums[i] = nums[i],nums[p1]
             p1 += 1
     return nums
-print(applyOperations([1,2,2,1,1,0]))
+# print(applyOperations([1,2,2,1,1,0]))
+# a,b = map(int,input.split())
+
+def countOne(nums):
+    d = {}
+    n = len(nums)
+    for i in range(n):
+        if nums[i] in d.keys():
+            d[nums[i]] += 1
+        else:
+            d[nums[i]] = 1
+    for key,value in d.items():
+        if value == 1:
+            return key
+# print(countOne([5, 7, 5]))
+def max_algo(nums,a,m):
+    nums.sort()
+    sum = nums[0]
+    count = 0
+    for i in range(a):
+        if(sum <= m):
+            sum += nums[i]
+            count += 1
+    return count
+# print(max_algo([4, 3, 8, 4, 7, 3],6, 15))
+# [3,3,4,4,7,8]
+
+def unique_song(n,songs):
+    d = {}
+    for i in range(n):
+        if songs[i] in d.keys():
+            d[songs[i]] += 1
+        else:
+            d[songs[i]] = 1
+    return len(d)
+# print(unique_song(8,[1, 2, 1, 3, 2, 7, 4, 2]))
+def unique_seq(n,songs):
+    p1 = 0
+    max_seq = 0
+    
+    while(p1 < n):
+        seen = []
+        p2 = p1
+        while p2 < n and songs[p2] not in seen:
+            seen.append(songs[p2])
+            p2 += 1
+            max_seq = max(max_seq, p2 - p1)
+        p1 += 1
+    return max_seq
+# print(unique_seq(8,[1, 2, 1, 3, 2, 7, 4, 2]))
+
+def sub_arr_sum(n,t,nums):
+    count = 0
+    for p1 in range(n):
+        sum = 0
+        for p2 in range(p1,n):
+            sum += nums[p2]
+            if sum == t:
+                count += 1
+                break
+    return count
+# print(sub_arr_sum(5, 7,[2, 4, 1, 2, 7]))
+def max_row(num):
+    remaining_items = num
+    row = 0
+    for i in range(1,num // 2):
+        remaining_items -= i
+        row += 1
+        if remaining_items < i:
+            break
+        
+    return row
+# print(max_row(12))
