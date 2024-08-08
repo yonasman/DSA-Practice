@@ -661,3 +661,24 @@ def max_row(num):
         
     return row
 # print(max_row(12))
+# strictly palindrome
+def strictly_palindrome(num):
+    for i in range(2,num-1):
+        temp_num = num
+        str_bin = ""
+        while temp_num:
+            str_bin = str(temp_num % i) + str_bin
+            temp_num = temp_num // i
+        if str_bin != str_bin[::-1]:
+            return False
+    return True
+# print(strictly_palindrome(9))
+def insert_sort(nums):
+    n = len(nums)
+    for i in range(n):
+        idx = i
+        for j in range(i + 1,n):
+            if nums[idx] > nums[j]:
+                nums[idx],nums[j] = nums[j],nums[idx]
+    return nums
+# print(insert_sort([2,0,2,1,1,0]))
