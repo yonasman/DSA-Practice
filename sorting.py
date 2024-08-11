@@ -682,3 +682,48 @@ def insert_sort(nums):
                 nums[idx],nums[j] = nums[j],nums[idx]
     return nums
 # print(insert_sort([2,0,2,1,1,0]))
+"""
+2469. Convert the Temperature
+Easy
+
+615
+
+336
+
+Add to List
+
+Share
+You are given a non-negative floating point number rounded to two decimal places celsius, that denotes the temperature in Celsius.
+
+You should convert Celsius into Kelvin and Fahrenheit and return it as an array ans = [kelvin, fahrenheit].
+
+Return the array ans. Answers within 10-5 of the actual answer will be accepted.
+
+Note that:
+
+Kelvin = Celsius + 273.15
+Fahrenheit = Celsius * 1.80 + 32.00
+"""
+
+def convertTemperature(celsius):
+    ans = []
+    kelvin = round(celsius + 273.15,5)
+    fahrenheit = round(celsius * 1.8 + 32.00,5)
+    ans.append(kelvin)
+    ans.append(fahrenheit)
+    return ans
+# print(convertTemperature(36.50))
+def fizzBuzz(n):
+        ans = []
+        # loop and append the items to answer array based on condition
+        for i in range(1,n + 1):
+            if i % 3 == 0 and i % 5 == 0:
+                ans.append("FizzBuzz")
+            elif i % 3 == 0:
+                ans.append("Fizz")
+            elif i % 5 == 0:
+                ans.append("Buzz")
+            else:
+                ans.append(f"{i}")
+        return ans
+# print(fizzBuzz(3))
