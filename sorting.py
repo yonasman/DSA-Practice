@@ -727,3 +727,34 @@ def fizzBuzz(n):
                 ans.append(f"{i}")
         return ans
 # print(fizzBuzz(3))
+def numIdenticalPairs(nums):
+        n = len(nums)
+        numOfIdentical = 0
+        for i in range(n):
+            for j in range(i,n):
+                if nums[i] == nums[j] and i < j:
+                    numOfIdentical += 1
+        return numOfIdentical
+# print(numIdenticalPairs([1,1,1,1]))
+def IdenticalPairs(nums):
+    d = {}
+    for num in nums:
+        if num in d:
+            d[num] += 1
+        else:
+            d[num] = 1
+    numOfIdentical = 0
+    for value in d.values():
+        if value > 1:
+            numOfIdentical += (value * (value - 1)) // 2
+    return numOfIdentical
+# print(IdenticalPairs( [1,2,3,1,1,3]))
+def finalValueAfterOperations(operations):
+    x = 0
+    for operation in operations:
+        if operation[1] == "-":
+            x -= 1
+        else:
+            x += 1
+    return x
+print(finalValueAfterOperations(["X++","++X","--X","X--"]))
