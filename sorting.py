@@ -780,4 +780,31 @@ def findMaxAverage(nums,k):
         current_sum = sum(nums[i:k + i])
         max_sum = max(current_sum,max_sum)
     return max_sum / k
-print(findMaxAverage(nums = [5], k = 1))
+# print(findMaxAverage(nums = [5], k = 1))
+def windowAvg(nums,k):
+    n = len(nums)
+    output = []
+    current_sum = 0
+    for i in range(k):
+        current_sum += i
+    current_avg = current_sum / k
+    output.append(current_avg)
+    for i in range(k,n):
+        current_sum += nums[i] - nums[i - k]
+        output.append(current_sum / k)
+    return output
+# print(windowAvg([1, 2, 3, 4, 5, 6, 7, 8, 9],3))
+def max_sliding_window(nums, k):
+    n = len(nums)
+    output = []
+    max_num = 0
+    p1 = 0
+    p2 = k
+    # [1, 2, 3, 4, 5, 6, 7, 8, 9],3
+    while p2 <= n:
+        max_num = max(nums[p1:p2])
+        output.append(max_num)
+        p1 += 1
+        p2 += 1
+    return output
+# print(max_sliding_window([1, 2, 3, 4, 5, 6, 7, 8, 9],3))
