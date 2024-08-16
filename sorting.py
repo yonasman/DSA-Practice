@@ -808,3 +808,28 @@ def max_sliding_window(nums, k):
         p2 += 1
     return output
 # print(max_sliding_window([1, 2, 3, 4, 5, 6, 7, 8, 9],3))
+def length_of_longest_substring_k_distinct(s, k):
+    if k == 0:
+        return 0
+    
+    n = len(s)
+    left = 0
+    right = 0
+    char_count = {}
+    max_length = 0
+    for right in range(n):
+        char = s[right]
+        if char in char_count:
+            char_count[char] += 1
+        else:
+            char_count[char] = 1
+    print(char_count)
+    while len(char_count) > k:
+        left_char = s[left]
+        char_count[left_char] -= 1
+        if char_count[left_char] == 0:
+            del char_count[left_char]
+        left += 1
+        max_length = max(max_length, right - left + 1)
+    return max_length
+print(length_of_longest_substring_k_distinct("eceba",2))
