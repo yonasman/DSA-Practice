@@ -823,13 +823,42 @@ def length_of_longest_substring_k_distinct(s, k):
             char_count[char] += 1
         else:
             char_count[char] = 1
-    print(char_count)
-    while len(char_count) > k:
-        left_char = s[left]
-        char_count[left_char] -= 1
-        if char_count[left_char] == 0:
-            del char_count[left_char]
-        left += 1
+        while len(char_count) > k:
+            left_char = s[left]
+            char_count[left_char] -= 1
+            if char_count[left_char] == 0:
+                del char_count[left_char]
+            left += 1
         max_length = max(max_length, right - left + 1)
     return max_length
-print(length_of_longest_substring_k_distinct("eceba",2))
+# print(length_of_longest_substring_k_distinct("eceba",2))
+def length_of_longest_substring(s):
+    n = len(s)
+    start = 0
+    max_length = 0
+    char_set = set()
+    
+    for end in range(n):
+        while s[end] in char_set:
+            char_set.remove(s[start])
+            start += 1
+        char_set.add(s[end])
+        max_length = max(max_length, end - start + 1)
+        print(char_set)
+    return max_length
+# print(length_of_longest_substring("abcabcbb"))
+def min_subarray_len(nums,s):
+    n = len(nums)
+    if n == 0:
+        return 0
+    start = 0
+    current_sum = 0
+    min_length = float("inf")
+    for end in range(n):
+        current_sum += nums[end]
+        while current_sum >= s:
+            min_length = min(min_length, end - start + 1)
+            current_sum -= nums[start]
+            start += 1
+    return min_length if min_length != "inf" else 0
+# print(min_subarray_len([2,3,1,2,4,3],7))
