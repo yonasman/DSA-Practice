@@ -95,3 +95,46 @@ def moveZeros2(nums):
         nums[i] = 0
     # print(nums)
 # moveZeros2([0,1,0,3,12])
+# problem 5
+"""
+1365. How Many Numbers Are Smaller Than the Current Number
+Easy
+Add to List
+
+Share
+Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it. That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
+
+Return the answer in an array.
+"""
+def smallerNumbersThanCurrent(nums):
+    n = len(nums)
+    output = []
+    # sortedNums = sorted(nums)
+    for i in range(n):
+        count = 0
+        for j in range(n):
+            if nums[i] > nums[j]:
+                count += 1
+        output.append(count)
+    return output
+# print(smallerNumbersThanCurrent([8,1,2,2,3]))
+[1,2,2,3,8]
+def smallerNumbersThanCurrent2(nums):
+    sortedNums = sorted(nums)
+    n = len(nums)
+    output = []
+    for i in range(n):
+        print(sortedNums[:nums[i]])
+        output.append(len(sortedNums[:sortedNums.index(nums[i])]))
+    return output
+# print(smallerNumbersThanCurrent2([8,1,2,2,3]))
+def smallerNumbersThanCurrent3(nums):
+    sortedNums = sorted(nums)
+    # create a dict to count the numbers smaller than current
+    smaller_count = {}
+    for i, num in enumerate(sortedNums):
+        if num not in smaller_count:
+            smaller_count[num] = i
+    result = [smaller_count[num] for num in nums]
+    return result
+# print(smallerNumbersThanCurrent3([8,1,2,2,3]))
