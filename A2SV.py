@@ -68,4 +68,30 @@ def merge(nums1, m, nums2,n):
         p2 -= 1
         p -= 1
     print(nums1)
-merge(nums1 = [1,2,3,0,0,0], m = 3, nums2 = [4,5,6], n = 3)
+# merge(nums1 = [1,2,3,0,0,0], m = 3, nums2 = [4,5,6], n = 3)
+"""
+problem 4
+Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+Note that you must do this in-place without making a copy of the array.
+"""
+def moveZeroes(nums):
+    non_zero_idx = 0
+    n = len(nums)
+    for i in range(n):
+        if nums[i] != 0:
+            nums[i],nums[non_zero_idx] = nums[non_zero_idx],nums[i]
+            non_zero_idx += 1
+    print(nums)
+# moveZeroes([0,1,0,3,12])
+def moveZeros2(nums):
+    n = len(nums)
+    non_zero_idx = 0
+    for i in range(n):
+        if nums[i] != 0:
+            nums[non_zero_idx] = nums[i]
+            non_zero_idx += 1
+    for i in range(non_zero_idx,n):
+        nums[i] = 0
+    # print(nums)
+# moveZeros2([0,1,0,3,12])
