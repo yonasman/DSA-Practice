@@ -22,4 +22,31 @@ def reverseString2(s):
     print(s)
 # print(reverseString2(["H","a","n","n","a","h"]))
 # problem 2
+"""
+1768. Merge Strings Alternately
+Easy
 
+3904
+
+98
+
+Add to List
+
+Share
+You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, starting with word1. If a string is longer than the other, append the additional letters onto the end of the merged string.
+
+Return the merged string.
+"""
+def mergeAlternately(word1,word2):
+    n1 = len(word1)
+    n2 = len(word2)
+    mergedString = ""
+    for i in range(min(n1,n2)):
+        mergedString += word1[i]
+        mergedString += word2[i]
+    if(n2 > n1):
+            mergedString += word2[n1:]
+    elif n1 > n2:
+            mergedString += word1[n2:]
+    return mergedString
+# print(mergeAlternately(word1 = "abc", word2 = "pqrzx"))
