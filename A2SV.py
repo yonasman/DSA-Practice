@@ -138,3 +138,17 @@ def smallerNumbersThanCurrent3(nums):
     result = [smaller_count[num] for num in nums]
     return result
 # print(smallerNumbersThanCurrent3([8,1,2,2,3]))
+"""
+Given an array nums of size n, return the majority element.
+
+The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+"""
+def majorityElement(nums):
+    d = {}
+    for num in nums:
+        if num in d:
+            d[num] += 1
+        else:
+            d[num] = 1
+    return max(d,key = d.get)
+# print(majorityElement([3,3,4]))
