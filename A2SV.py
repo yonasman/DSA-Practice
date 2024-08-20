@@ -180,3 +180,100 @@ def calPoints(ope):
             result.append(int(op))
     return sum(result)
 # print(calPoints(["5","2","C","D","+"]))
+def repeatedCharacter(s):
+    n = len(s)
+    idx = float("inf")
+    for i in range(n):
+        for j in range(i + 1,n):
+            if s[i] == s[j]:
+                idx = min(idx, j)
+    print(s[idx])
+# repeatedCharacter("abcdd")
+def repeatedCharacter2(s):
+    seen = set()
+    for letter in s:
+        if letter in seen:
+            return letter
+        else:
+            seen.add(letter)
+# print(repeatedCharacter2("abccbaacz"))
+def repeatedCharacter3(s):
+    seen = {}
+    for letter in s:
+        if letter in seen:
+            return letter
+        seen[letter] = 1
+# print(repeatedCharacter3("abccbaacz"))
+# ***************************************
+# 4 = number of applicant, 3 apartment, 5 difference
+# 1- 60
+# 2- 45 
+# 3- 80
+# 4- 60
+# 30 60 75
+
+def apartment(p,a,d,apart,size):
+    n = p
+    m = a
+    i = 0
+    j = 0
+    assign = 0
+    
+    while i < n and j < m:
+        apart.sort()
+        size.sort()
+        
+        if size[i] >= apart[j] - d and size[i] <= apart[j] + d:
+            assign += 1
+            i += 1
+            j += 1
+        elif size[i] < apart[j] - d:
+            i += 1
+        else:
+            j += 1
+    return assign
+# print(apartment(4,3,5,[30,60,75],[60,45,80,60]))
+# n = input() 
+# nums = list(map(int,input().split()))
+def targetSum(n,nums):
+    max_sum = global_sum = nums[0]
+    
+    for i in range(1,n):
+        max_sum = max(nums[i], max_sum + nums[i])
+        if max_sum > global_sum:
+            global_sum = max_sum
+    return global_sum
+# print(targetSum(8,[-1, 3, -2, 5, 3, -5, 2, 2]))
+def countSubArray(n, t, nums):
+    p1 = 0
+    count = 0
+    current_sum = 0
+
+    for p2 in range(n):
+        current_sum += nums[p2]
+
+        # While the current_sum is greater than t, shrink the window
+        while current_sum > t and p1 <= p2:
+            current_sum -= nums[p1]
+            p1 += 1
+
+        # Check if the current_sum equals t
+        if current_sum == t:
+            count += 1
+    return count
+
+# Example usage
+# print(countSubArray(5, 7, [2, -1, 3, 5, -2])) 
+
+
+def smallerCount(n,nums):
+    output = []
+    for i in range(n):
+        nearest_idx = -1
+        for j in range(i):
+            if nums[j] < nums[i]:
+                nearest_idx = j
+        output.append(nearest_idx)
+    print(output)
+# smallerCount(8,[2, 5, 1, 4, 8, 3, 2, 5])
+
