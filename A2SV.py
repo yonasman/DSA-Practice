@@ -335,3 +335,71 @@ def sortPeople(names, heights):
             break
     return names
 # print(sortPeople(names = ["Mary","John","Emma"], heights = [180,165,170]))
+
+# selection sort
+# **********************************
+# pseudo code
+def selectionSort(nums):
+    n = len(nums)
+    for i in range(n):
+        min_idx = i
+        for j in range(i + 1,n):
+            if nums[j] < nums[min_idx]:
+                min_idx = j
+        nums[i], nums[min_idx] = nums[min_idx], nums[i]
+    return nums
+# print(selectionSort([5,2,6,2,1,1]))
+#[2,5,6,2,1,1]
+# insertion sort
+def insertionSort(nums):
+    n = len(nums)
+    for i in range(1,n):
+        key = nums[i]
+        j = i - 1
+        while j >= 0 and key < nums[j]:
+            nums[j+1] = nums[j]
+            j -= 1
+        nums[j+1] = key
+    return nums
+# print(insertionSort([5,2,6,2,1,1]))
+def countingSort(nums):
+    n = len(nums)
+    count = [0] * (max(nums) + 1)
+    
+    for num in nums:
+        count[num] += 1
+    for i in range(1,n+1):
+        count[i] += count[i - 1]
+    print(count)
+    output = [0] * n
+    i = n - 1
+    while i >= 0:
+        output[count[nums[i]] - 1] = nums[i]
+        count[nums[i]] -= 1
+        i -= 1
+    return output
+# print(countingSort([1,4,1,2,7,5,2]))
+def sortPeople2(names, heights):
+    n = len(heights)
+    max_h = max(heights)
+    count = [0] * (max_h + 1)
+    for h in heights:
+        count[h] += 1
+    for i in range(1, max_h + 1):
+        count[i] += count[i - 1]
+    outputHeights = [0] * n
+    outputNames = [0] * n
+    for i in range(n - 1, -1, -1):
+        height = heights[i]
+        name = names[i]
+        
+        position = count[height] - 1
+        outputHeights[position] = height
+        outputNames[position] = name
+        
+        # decrease the count for height
+        count[height] -= 1
+    return outputNames
+# print(sortPeople2(names = ["Mary","John","Emma"], heights = [180,165,170]))
+    
+        
