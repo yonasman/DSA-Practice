@@ -303,3 +303,35 @@ def GCF2(num1, num2):
         num1, num2 = num2, num1 % num2
     return num1
 # print(GCF2(48,180))
+# ********************************
+# SORTING ALGORITHM
+# ********************************
+# bubble sort
+# ***********
+def bubbleSort(nums):
+    n = len(nums)
+    swap = False
+    for i in range(n):
+        for j in range(n - i - 1):
+            if nums[j] > nums[j + 1]:
+                nums[j+1], nums[j] = nums[j], nums[j+1]
+                swap = True
+    if not swap:
+        print("already sorted!")
+        return nums
+    return nums
+# print(bubbleSort([1,2,3,4,5]))
+
+def sortPeople(names, heights):
+    n = len(heights)
+    for i in range(n):
+        swap = False
+        for j in range(n - i - 1):
+            if heights[j] < heights[j + 1]:
+                heights[j], heights[j + 1] = heights[j + 1], heights[j]
+                names[j], names[j+1] = names[j+1], names[j]
+                swap = True
+        if not swap:
+            break
+    return names
+# print(sortPeople(names = ["Mary","John","Emma"], heights = [180,165,170]))
