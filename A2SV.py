@@ -276,4 +276,30 @@ def smallerCount(n,nums):
         output.append(nearest_idx)
     print(output)
 # smallerCount(8,[2, 5, 1, 4, 8, 3, 2, 5])
-
+# def leftRightDifference(nums):
+#     n = len(nums)
+#     output = []
+#     for i in range(n):
+#         if i == 0:
+#             output.append(0)
+#         else:
+#             #[10,4,8,3] [0,10,14,22]
+#             output.append(output[i - 1] + nums[i - 1])
+#     return output
+# print(leftRightDifference([10,4,8,3]))
+def GCF(num1, num2):
+    if num1 > num2:
+        min_num = num2
+    else:
+        min_num = num1
+    gcf = 0
+    for i in range(2,min_num):
+        if num1 % i == 0 and num2 % i == 0:
+            gcf = max(gcf, i)
+    return gcf
+# print(GCF(48,180))
+def GCF2(num1, num2):
+    while(num2):
+        num1, num2 = num2, num1 % num2
+    return num1
+# print(GCF2(48,180))
