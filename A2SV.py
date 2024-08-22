@@ -401,5 +401,97 @@ def sortPeople2(names, heights):
         count[height] -= 1
     return outputNames
 # print(sortPeople2(names = ["Mary","John","Emma"], heights = [180,165,170]))
+def numberGame(nums):
+    output = []
+    nums.sort()
+    n = len(nums)
     
-        
+    for i in range(0,n,2):
+        if i + 1 < n:
+            a = nums[i]
+            b = nums[i + 1]
+            output.append(b)
+            output.append(a)
+    return output
+# print(numberGame([5,4,2,3]))
+def maxWidthOfVerticalArea(points):
+    points.sort()
+    widest_vert_area = 0
+    n = len(points)
+    for i in range(n - 1):
+        current_vert_area = points[i + 1][0] - points[i][0]
+        widest_vert_area = max(widest_vert_area, current_vert_area)
+#     return widest_vert_area
+# print(maxWidthOfVerticalArea([[3,1],[9,0],[1,0],[1,4],[5,3],[8,8]]))
+def sortSentence(sent):
+    splittedSent = sent.split()
+    n = len(splittedSent)
+    for i in range(n):
+        min_idx = i
+        for j in range(i+1,n):
+            if splittedSent[min_idx][-1] > splittedSent[j][-1]:
+                min_idx = j
+        splittedSent[i], splittedSent[min_idx] = splittedSent[min_idx], splittedSent[i]
+    splittedSent = [s[:-1] for s in splittedSent]    
+    output = " ".join(splittedSent)
+    return output
+# print(sortSentence("is2 sentence4 This1 a3"))
+def findContentChildren(g,s):
+    g.sort()
+    s.sort()
+    i = 0
+    j = 0
+    contented_children = 0
+    while i < len(g) and j < len(s):
+        if s[j] >= g[i]:
+            contented_children += 1
+            i += 1
+        j += 1
+    return contented_children
+# print(findContentChildren([10,9,8,7], [5,6,7,8]))
+def merge(nums1,m,nums2,n):
+    p1 = m - 1
+    p2 = n - 1
+    p = m + n - 1
+    
+    while p1 >= 0 and p2 >= 0:
+        if nums2[p2] > nums1[p1]:
+            nums1[p] = nums2[p2]
+            p2 -= 1
+        else:
+            nums1[p] = nums1[p1]
+            p1 -= 1
+        p -= 1
+    while p2 >= 0:
+        nums1[p] = nums2[p2]
+        p -= 1
+        p2 -= 1
+    return nums1
+# print(merge(nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3))
+def sortVowels(s):
+    v = "EOUAIeaoui"
+    n = len(s)
+    vowels = []
+    for i in range(n):
+        if s[i] in v:
+            vowels.append(s[i])
+    vowels.sort()
+    s = list(s)
+    vowel_idx = 0
+    for i in range(n):
+        if s[i] in v:
+            s[i] = vowels[vowel_idx]
+            vowel_idx += 1
+    return "".join(s)
+# print(sortVowels("lEetcOde"))
+def numIdenticalPairs(nums):
+        freq = {}
+        count = 0
+        for num in nums:
+            if num in freq:
+                count += freq[num]
+                freq[num] += 1
+            else:
+                freq[num] = 1
+        return count
+# print(numIdenticalPairs([1,2,3,1,1,3]))
