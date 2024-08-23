@@ -520,3 +520,12 @@ def di(s):
         s1[s[i]] = 1 + s1.get(s[i],0)
     return s1
 # print(di("bbcc"))
+def isPalindrome(s):
+    let = "abcdefghijklmnopqrstuvwxyz"
+    letters = ""
+    s = s.lower()
+    for l in s:
+        if l in let:
+            letters += l
+    return letters == letters[::-1]
+# print(isPalindrome("OP"))
