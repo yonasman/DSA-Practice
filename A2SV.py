@@ -495,3 +495,28 @@ def numIdenticalPairs(nums):
                 freq[num] = 1
         return count
 # print(numIdenticalPairs([1,2,3,1,1,3]))
+def isAnagram(s1,s2):
+    d1 = {}
+    d2 = {}
+    for s in s1:
+        if s in d1:
+            d1[s] += 1
+        else:
+            d1[s] = 1
+    for s in s2:
+        if s in d2:
+            d2[s] += 1
+        else:
+            d2[s] = 1
+    # for key in d1.keys():
+    #     if key not in d2.keys() or d1[key] != d2[key]:
+    #         return False
+    
+    return d1 == d2
+# print(isAnagram(s1="bbcc", s2="ccbc"))
+def di(s):
+    s1 = {}
+    for i in range(len(s)):
+        s1[s[i]] = 1 + s1.get(s[i],0)
+    return s1
+# print(di("bbcc"))
