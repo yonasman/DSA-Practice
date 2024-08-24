@@ -50,7 +50,7 @@ def flipAndInvertImage(images):
             left += 1
             right -= 1
     return images
-print(flipAndInvertImage([[1,1,0,0],[1,0,0,1],[0,1,1,1],[1,0,1,0]]))
+# print(flipAndInvertImage([[1,1,0,0],[1,0,0,1],[0,1,1,1],[1,0,1,0]]))
 #[[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]
 # reversing an array without using two pointers
 def reverse_arr2(nums):
@@ -60,3 +60,67 @@ def reverse_arr2(nums):
         reversed_arr[i] = nums[n - 1 - i]
     return reversed_arr
 # print(reverse_arr2([1,1,0,0]))
+# apply operations to an array
+def apply_operations(nums):
+    n = len(nums)
+    p1, p2 = 0, 1
+    while p2 < n:
+        if nums[p1] == nums[p2]:
+            nums[p1] = nums[p1] * 2
+            nums[p2] = 0
+            p1 += 1
+            p2 += 1
+        else:
+            p1 += 1
+            p2 += 1
+            
+    # push zeros
+    # output = [0] * n
+    # non_zero_idx = 0
+    # for i in range(n):
+    #     if nums[i] != 0:
+    #         output[non_zero_idx] = nums[i]
+    #         non_zero_idx += 1
+    non_zero_idx = 0
+    for i in range(n):
+        if nums[i] != 0:
+            nums[non_zero_idx],nums[i] = nums[i], nums[non_zero_idx]
+            non_zero_idx += 1
+    return nums
+# print(apply_operations([1,2,2,1,1,0]))
+def move_zeros(nums):
+    n = len(nums)
+    non_zero_idx = 0
+    for i in range(n):
+        if nums[i] != 0:
+            nums[non_zero_idx], nums[i] = nums[i], nums[non_zero_idx]
+            non_zero_idx += 1
+    return nums
+# print(move_zeros([0,1,0,3,12]))
+def isStrictlyPalindromic(n):
+    for base in range(2,n - 1):
+        stringRep = ""
+        num = n
+        while num > 0:
+            numStr = num % base
+            stringRep = str(numStr) + stringRep
+            num //= base
+            if stringRep != stringRep[::-1]:
+                return False
+    return True
+# print(isStrictlyPalindromic(9))
+def sortColors(colors):
+    low, mid, high = 0,0,len(colors) - 1
+    while mid <= high:
+        if colors[mid] == 0:
+            colors[low], colors[mid] = colors[mid], colors[low]
+            low += 1
+            mid += 1
+        elif colors[mid] == 1:
+            mid += 1
+        else:
+            colors[mid], colors[high] = colors[high], colors[mid]
+            high -= 1
+            mid += 1
+    return colors
+# print(sortColors([2,0,2,1,1,0]))
