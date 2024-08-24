@@ -549,18 +549,23 @@ def isPalindrome2(s):
 # print(isPalindrome2("aba"))
 def intersect(nums1, nums2):
     output = []
-    num1Count = {}
-    num2Count = {}
-    for num in nums1:
-        num1Count[num] = 1 + num1Count.get(num,0)
-    for n in nums2:
-        num2Count[n] = 1 + num2Count.get(n,0)
-    for num in num1Count.keys():
-        if num2Count.get(num):
-            output.append(max(num1Count.get(num), num2Count.get(num)))
-    print(num1Count)
-    print(num2Count)
+    nums1.sort()
+    nums2.sort()
+    p1,p2 = 0,0
+    
+    while p1 < len(nums1) and p2 < len(nums2):
+        if nums1[p1] == nums2[p2]:
+            output.append(nums1[p1])
+            p2 += 1
+            p1 += 1
+        elif nums1[p1] > nums2[p2]:
+            p2 += 1
+        else:
+            p1 += 1
     return output
+# print(intersect([4,9,5],[9,4,9,8,4]))
+    
+    
 # print(intersect(nums1 = [1,2,2,1], nums2 = [2,2]))
 def maxIceCream(costs, coins):
     n = len(costs)
@@ -601,7 +606,7 @@ def maxIceCream2(costs, coins) :
 import math
 def distance_from_origin(points):
     return math.sqrt(points[0] ** 2 + points[1] ** 2)
-print(distance_from_origin([3,4]))
+# print(distance_from_origin([3,4]))
 def kClosest(points,k):
     sortedPoints = sorted(points, key=distance_from_origin)
     # print(sortedPoints)
