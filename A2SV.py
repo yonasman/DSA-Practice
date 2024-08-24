@@ -597,3 +597,18 @@ def maxIceCream2(costs, coins) :
             coins -= c
     return num_of_ice_creams
 # print(maxIceCream([10,6,8,7,7,8],5))
+# ****************************
+import math
+def distance_from_origin(points):
+    return math.sqrt(points[0] ** 2 + points[1] ** 2)
+print(distance_from_origin([3,4]))
+def kClosest(points,k):
+    sortedPoints = sorted(points, key=distance_from_origin)
+    # print(sortedPoints)
+    return sortedPoints[:k]
+# print(kClosest( points = [[3,3],[5,-1],[-2,4]], k = 2))
+def kClosest(points,k):
+    distances = [(point, point[0] ** 2 + point[1]**2) for point in points]
+    distances.sort(key=lambda x:x[1])
+    return [point for point, distance in distances[:k]]
+# print(kClosest(points = [[3,3],[5,-1],[-2,4]], k = 2))
