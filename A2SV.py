@@ -521,7 +521,7 @@ def di(s):
     return s1
 # print(di("bbcc"))
 def isPalindrome(s):
-    let = "abcdefghijklmnopqrstuvwxyz"
+    let = "abcdefghijklmnopqrstuvwxyz1234567890"
     letters = ""
     s = s.lower()
     for l in s:
@@ -529,3 +529,71 @@ def isPalindrome(s):
             letters += l
     return letters == letters[::-1]
 # print(isPalindrome("OP"))
+def isPalindrome2(s):
+    s = s.lower()
+    letters = "abcdefghijklmnopqrstuvwxyz1234567890"
+    newLet = ""
+    for l in s:
+        if l in letters:
+            newLet += l
+    
+    p1 = 0
+    p2 = len(newLet) - 1
+            
+    while p1 <= p2: 
+        if newLet[p1] != newLet[p2]:
+            return False
+        p1 += 1
+        p2 -= 1
+    return True
+# print(isPalindrome2("aba"))
+def intersect(nums1, nums2):
+    output = []
+    num1Count = {}
+    num2Count = {}
+    for num in nums1:
+        num1Count[num] = 1 + num1Count.get(num,0)
+    for n in nums2:
+        num2Count[n] = 1 + num2Count.get(n,0)
+    for num in num1Count.keys():
+        if num2Count.get(num):
+            output.append(max(num1Count.get(num), num2Count.get(num)))
+    print(num1Count)
+    print(num2Count)
+    return output
+# print(intersect(nums1 = [1,2,2,1], nums2 = [2,2]))
+def maxIceCream(costs, coins):
+    n = len(costs)
+    
+    count_arr = [0] * (max(costs) + 1)
+    
+    for cost in costs:
+        count_arr[cost] += 1
+    # print(count_arr)
+    for i in range(1,max(costs) + 1):
+        count_arr[i] += count_arr[i - 1]
+    sortedCosts = [0] * n
+    for i in range(n - 1,-1,-1):
+        cost = costs[i]
+        position = count_arr[cost] - 1
+        sortedCosts[position] = cost
+        count_arr[cost] -= 1
+    
+    num_of_ice_cream = 0
+    current_cost = 0
+    for cost in sortedCosts:
+        if current_cost + cost <= coins:
+            current_cost += cost
+            num_of_ice_cream += 1
+            print(current_cost)
+    return num_of_ice_cream
+# print(maxIceCream([10,6,8,7,7,8],5))
+def maxIceCream2(costs, coins) :
+    num_of_ice_creams = 0
+    costs.sort()
+    for c in costs:
+        if c <= coins:
+            num_of_ice_creams += 1
+            coins -= c
+    return num_of_ice_creams
+# print(maxIceCream([10,6,8,7,7,8],5))
