@@ -222,4 +222,54 @@ def isPalindrome3(s):
         p2 -= 1
     return True
 # print(isPalindrome3("A man, a plan, a canal: Panama"))
-    
+def intersectArr(nums1, nums2):
+    nums1.sort()
+    nums2.sort()
+    p1,p2 = 0,0
+    output = []
+    n,m = len(nums1), len(nums2)
+    while p1 < n and p2 < m:
+        if nums1[p1] == nums2[p2]:
+            output.append(nums1[p1])
+            p1 += 1
+            p2 += 1
+        elif nums1[p1] < nums2[p2]:
+            p1 += 1
+        else:
+            p2 += 1
+    return output
+# print(intersectArr(nums1 = [1,2,2,1], nums2 = [2,2]))
+def twoSum(nums, target):
+    n = len(nums)
+    left, right = 0, n - 1
+    while left < right:
+        current_sum = nums[left] + nums[right]
+        if current_sum == target:
+            return [left + 1, right + 1]
+        elif current_sum < target:
+            left += 1
+        else:
+            right -= 1
+# print(twoSum(nums = [2,7,11,15], target = 9))
+def countPairs(nums, target):
+    n = len(nums)
+    count = 0
+    for i in range(n):
+        for j in range(i+1,n):
+            if nums[i] + nums[j] < target:
+                count += 1
+    return count
+# print(countPairs(nums = [-1,1,2,3,1], target = 2))
+def countPairs2(nums, target):
+    n = len(nums)
+    i,j = 0,1
+    count_pair = 0
+    while i < n - 1:
+        if nums[i] + nums[j] < target:
+            count_pair += 1
+        j += 1
+        if j == n:
+            i += 1
+            j = i + 1
+    return count_pair
+# print(countPairs2(nums = [-6,2,5,-2,-7,-1,3], target = -2))

@@ -564,8 +564,6 @@ def intersect(nums1, nums2):
             p1 += 1
     return output
 # print(intersect([4,9,5],[9,4,9,8,4]))
-    
-    
 # print(intersect(nums1 = [1,2,2,1], nums2 = [2,2]))
 def maxIceCream(costs, coins):
     n = len(costs)
