@@ -189,3 +189,37 @@ def strStr3(haystack, needle):
             return i
     return -1
 # print(strStr3(haystack = "leetcode", needle = "leeto"))
+# valid palindrome
+def isPalindrome(s):
+    chars = "abcdefghijklmnopqrstuvwxyz1234567890"
+    n = len(s)
+    p1 = 0
+    p2 = n - 1
+    while p1 < p2:
+        if s[p1].lower() not in chars:
+            p1 += 1
+        elif s[p2].lower() not in chars:
+            p2 -= 1
+        elif s[p1].lower() != s[p2].lower():
+            return False
+        else:
+            p1 += 1
+            p2 -= 1
+    return True
+# print(isPalindrome(" "))
+def isPalindrome2(s):
+    filtered = "".join(char.lower() for char in s if char.isalnum())
+    return filtered == filtered[::-1]
+# print(isPalindrome2("A man, a plan, a canal: Panama"))
+def isPalindrome3(s):
+    filtered = "".join(filter(str.isalnum,s.lower()))
+    p1 = 0
+    p2 = len(filtered) - 1
+    while p1 < p2:
+        if filtered[p1] != filtered[p2]:
+            return False
+        p1 += 1
+        p2 -= 1
+    return True
+# print(isPalindrome3("A man, a plan, a canal: Panama"))
+    
