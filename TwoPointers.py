@@ -124,3 +124,68 @@ def sortColors(colors):
             mid += 1
     return colors
 # print(sortColors([2,0,2,1,1,0]))
+def removeDuplicates(nums):
+    n = len(nums)
+    output = []
+    for num in nums:
+        if num not in output:
+            output.append(num)
+    return len(output)
+# print(removeDuplicates([0,0,1,1,1,2,2,3,3,4]))
+def removeDuplicates2(nums):
+    n = len(nums)
+    if not nums:
+        return 0
+    unique_ele = 1
+    for i in range(1,n):
+        if nums[i] != nums[i - 1]:
+            nums[unique_ele] = nums[i]
+            unique_ele += 1
+    return unique_ele
+# print(removeDuplicates2([0,0,1,1,1,2,2,3,3,4]))
+def removeDuplicates3(nums):
+    if len(nums) == 0:
+        return 0
+    n = len(nums)
+    i = 0
+    for j in range(1,n):
+        if nums[i] != nums[j]:
+            i += 1
+            nums[i] = nums[j]
+    return i + 1
+# print(removeDuplicates3([0,0,1,1,1,2,2,3,3,4]))
+def removeElement(nums, val):
+    n = len(nums)
+    i = 0
+    for j in range(n):
+        if nums[j] != val:
+            nums[i] = nums[j]
+            i += 1
+    return i
+# print(removeElement(nums = [0,1,2,2,3,0,4,2], val = 2))
+def strStr(haystack, needle):
+    if needle not in haystack:
+        return -1
+    return haystack.index(needle)
+# print(strStr(haystack = "leetcode", needle = "leeto"))
+def strStr2(haystack, needle):
+    p1, p2 = 0, len(needle)
+    n = len(haystack)
+    while p1 < n:
+        if haystack[p1:p2] == needle:
+            return p1
+        else:
+            p1 += 1
+            p2 += 1
+    return -1
+# print(strStr2(haystack = "leetcode", needle = "leeto"))
+def strStr3(haystack, needle):
+    if not needle:
+        return 0
+    n = len(haystack)
+    m = len(needle)
+    for i in range(n - m + 1):
+        if haystack[i:i+m] == needle:
+            return i
+    return -1
+# print(strStr3(haystack = "leetcode", needle = "leeto"))
