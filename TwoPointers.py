@@ -273,3 +273,61 @@ def countPairs2(nums, target):
             j = i + 1
     return count_pair
 # print(countPairs2(nums = [-6,2,5,-2,-7,-1,3], target = -2))
+def threeSum(nums):
+    nums.sort()
+    n = len(nums)
+    output = []
+    for i in range(n):
+        if i > 0 and nums[i] == nums[i - 1]:
+            continue
+        left = i + 1
+        right = n - 1
+        while left < right:
+            total = nums[i] + nums[left] + nums[right]
+            if total < 0:
+                left += 1
+            elif total > 0:
+                right -= 1
+            else:
+                output.append([nums[i], nums[left], nums[right]])
+                while left < right and nums[left] == nums[left + 1]:
+                    left += 1
+                while left < right and nums[right] == nums[right - 1]:
+                    right -= 1
+                left += 1
+                right -= 1
+    return output
+# print(threeSum(nums = [-1,0,1,2,-1,-4]))
+# arithmetic triplets
+def dailyTemperatures(temperatures):
+    n = len(temperatures)
+    p1 = 0
+    p2 = 1
+    output = []
+    while p1 < n and p2 < n:
+        print(temperatures[p1], temperatures[p2])
+        if temperatures[p1] < temperatures[p2]:
+            output.append(p2 - p1)
+            p1 += 1
+            p2 = p1 + 1 
+        elif temperatures[p1] >= temperatures[p2]:
+            if p2 == n-1:
+                p1 += 1
+                p2 = p1 + 1
+                output.append(0)
+            else:
+                p2 += 1
+    output.append(0)
+    return output
+# print(dailyTemperatures([30,60,90]))
+def findMaxAverage(nums,k):
+    n = len(nums)
+    p2 = k
+    max_avg = float("-inf")
+    for p1 in range(n - k + 1):
+        print(sum(nums[p1:p2]))
+        current_avg = sum(nums[p1:p2]) / k
+        max_avg = max(current_avg, max_avg)
+        p2 += 1
+    return max_avg
+# print(findMaxAverage(nums = [5], k = 1))
