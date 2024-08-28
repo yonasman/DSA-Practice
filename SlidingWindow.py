@@ -92,3 +92,72 @@ def maxTurbulenceSize(arr):
     max_size = max(max_size, n - left)
     return max_size
 # print(maxTurbulenceSize([9,4,2,10,7,8,8,1,9]))
+def longestNiceSubstring(s):
+    n = len(s)
+    left = 0
+    output = ""
+    for right in range(n - 1):
+        if s[right].swapcase() not in s[right + 1:]:
+            left = right + 1
+        output = s[left:right]
+    return output
+# print(longestNiceSubstring("YazaAay"))
+def arithmeticTriplets(nums, diff):
+    num_set = set(nums)
+    number_of_triplets = 0
+    
+    for num in nums:
+        if num + diff in num_set and (num + 2 * diff in num_set):
+            number_of_triplets += 1
+    return number_of_triplets
+# print(arithmeticTriplets([0, 1, 4, 6, 7, 10], diff = 3))
+def longestNiceSubstring(s):
+    n = len(s)
+    nice_str = ""
+    nice_substr_len = 0
+    
+    def isNice(subString):
+        char_set = set(subString)
+        for c in subString:
+            if c.swapcase() not in char_set:
+                return False
+        return True
+    
+    for start in range(n):
+        for end in range(start+ 1, n):
+            subStr = s[start:end + 1]
+            if isNice(subStr) and end - start + 1 > nice_substr_len:
+                nice_substr_len = end - start + 1
+                nice_str = subStr
+    return nice_str
+# print(longestNiceSubstring("YazaAay"))
+def containsNearbyDuplicate(nums,k):
+    n = len(nums)
+    
+    for i in range(n):
+        for j in range(i+1,n):
+            if j - i <= k and nums[i] == nums[j]:
+                return True
+    return False
+# print(containsNearbyDuplicate(nums = [1,2,3,1,2,3], k = 2))
+def containsNearbyDuplicate2(nums,k):
+    n = len(nums)
+    left = 0
+    right = left + 1
+    while left <= n - 2:
+        if right > n - 1:
+            left += 1
+            right = left + 1
+        if right - left <= k and nums[left] == nums[right]:
+                return True
+        right += 1
+    return False
+# print(containsNearbyDuplicate2([1,2,3,1,2,3],2))
+def containsNearbyDuplicate3(nums, k):
+    seen = {}
+    for i,num in enumerate(nums):
+        if num in seen and i - seen[num] <= k:
+            return True
+        seen[num] = i
+    return False
+# print(containsNearbyDuplicate3([1,2,3,1,2,3],2))
