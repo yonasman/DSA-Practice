@@ -191,5 +191,34 @@ def findMaxAverage5(nums,k):
         current_sum = prefix_sum[j] - prefix_sum[j - k]
         max_avg = max(max_avg, current_sum / k)
     return max_avg
-print(findMaxAverage5(nums = [1,12,-5,-6,50,3], k = 4))
-# nums = [1,12,-5,-6,50,3], k = 4
+# print(findMaxAverage5(nums = [1,12,-5,-6,50,3], k = 4))
+# *******************
+def minimumRecolors(blocks, k):
+    n = len(blocks)
+    min_operations = float("inf")
+    
+    for i in range(n-k+1):
+        sub_block = blocks[i:k+i]
+        print(sub_block)
+        min_operations = min(min_operations, sub_block.count("W"))
+    return min_operations
+# print(minimumRecolors(blocks = "WBWBBBW", k = 2))
+def intersect2(nums1, nums2):
+    nums1.sort()
+    nums2.sort()
+    p1, p2 = 0,0
+    n = len(nums1)
+    m = len(nums2)
+    output = []
+    while p1 < n and p2 < m:
+        if nums1[p1] == nums2[p2]:
+            output.append(nums1[p1])
+            p1 += 1
+            p2 += 1
+        elif nums1[p1] > nums2[p2]:
+            p2 += 1
+        else:
+            p1 += 1
+    return output
+print(intersect2(nums1 = [1,1,2,2], nums2 = [2,2]))
+# nums1 = [4,5,9], nums2 = [4,4,8,9,9]
