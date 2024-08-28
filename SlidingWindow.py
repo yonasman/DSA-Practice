@@ -220,5 +220,39 @@ def intersect2(nums1, nums2):
         else:
             p1 += 1
     return output
-print(intersect2(nums1 = [1,1,2,2], nums2 = [2,2]))
-# nums1 = [4,5,9], nums2 = [4,4,8,9,9]
+# print(intersect2(nums1 = [1,1,2,2], nums2 = [2,2]))
+
+def findAnagrams(s, p):
+        p = sorted(p)
+        n = len(s)
+        i = 0
+        j = i + len(p)
+        output = []
+        
+        while j <= n:
+            if sorted(s[i:j]) == p:
+                output.append(i)
+            j += 1
+            i += 1
+        return output
+# print(findAnagrams("abab", "ab"))
+from collections import Counter
+def findAnagrams2(s,p):
+    n = len(s)
+    k = len(p)
+    p_counter = Counter(p)
+    s_counter = Counter()
+    output = []
+    
+    for i in range(n):
+        s_counter[s[i]] +=1
+        
+        if i >= k:
+            if s_counter[s[i - k]] == 1:
+                del s_counter[s[i - k]]
+            else:
+                s_counter[s[i - k]] -= 1
+        if s_counter == p_counter:
+            output.append(i - k + 1)
+    return output
+# print(findAnagrams2(s = "cbaebabacd", p = "abc"))
