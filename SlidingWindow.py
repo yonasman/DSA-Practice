@@ -161,3 +161,35 @@ def containsNearbyDuplicate3(nums, k):
         seen[num] = i
     return False
 # print(containsNearbyDuplicate3([1,2,3,1,2,3],2))
+def findMaxAverage3(nums, k):
+    n = len(nums)
+    # i = 0
+    max_avg = sum(nums[:k]) / k
+    for j in range(1,n - k + 1):
+        current_avg = sum(nums[j:k+j]) / k
+        max_avg = max(max_avg, current_avg)
+    return max_avg
+# print(findMaxAverage3(nums = [5], k = 1))
+def findMaxAverage4(nums,k):
+    n = len(nums)
+    current_sum = sum(nums[:k])
+    max_avg = current_sum / k
+    for i in range(k,n):
+        current_sum += nums[i] - nums[i - k]
+        max_avg = max(max_avg, current_sum / k)
+    return max_avg
+# print(findMaxAverage4(nums = [5], k = 1))
+def findMaxAverage5(nums,k):
+    n = len(nums)
+    prefix_sum = [0] * (n + 1)
+    # [0,1,13,7,1,51,54]
+    max_avg = float("-inf")
+    for i in range(n):
+        prefix_sum[i+1] = prefix_sum[i] + nums[i]
+        
+    for j in range(k,n+1):
+        current_sum = prefix_sum[j] - prefix_sum[j - k]
+        max_avg = max(max_avg, current_sum / k)
+    return max_avg
+print(findMaxAverage5(nums = [1,12,-5,-6,50,3], k = 4))
+# nums = [1,12,-5,-6,50,3], k = 4
