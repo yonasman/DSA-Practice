@@ -256,3 +256,30 @@ def findAnagrams2(s,p):
             output.append(i - k + 1)
     return output
 # print(findAnagrams2(s = "cbaebabacd", p = "abc"))
+def longestSubarray(nums):
+    n = len(nums)
+    left = 0
+    max_length = 0
+    num_of_zeros = 0
+    
+    for right in range(n):
+        if nums[right] == 0:
+            num_of_zeros += 1
+        while num_of_zeros > 1:
+            if nums[left] == 0:
+                num_of_zeros -= 1
+            left += 1
+        max_length = max(max_length, right - left)
+    return max_length
+# print(longestSubarray([0,1,1,1,0,1,1,0,1]))
+def longestSubarray2(nums):
+    n = len(nums)
+    left = 0
+    max_length = 0
+    
+    for right in range(1,n):
+        while nums[left:right + 1].count(0) > 1:
+            left += 1
+        max_length = max(max_length, right - left)
+    return max_length
+# print(longestSubarray2([1,1,0,1]))
