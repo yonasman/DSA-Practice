@@ -283,3 +283,57 @@ def longestSubarray2(nums):
         max_length = max(max_length, right - left)
     return max_length
 # print(longestSubarray2([1,1,0,1]))
+def dailyTemperatures(temperatures):
+    n = len(temperatures)
+    i = 0
+    j = i + 1
+    output = []
+    
+    while j < n:
+        if temperatures[i] < temperatures[j]:
+            output.append(j - i)
+            i += 1
+            j = i + 1
+        elif j == n - 1:
+            output.append(0)
+            i += 1
+            j = i + 1
+        else:
+            j += 1
+        
+    output.append(0)
+    return output
+# print(dailyTemperatures([30,60,90]))
+def longestNiceSubstring5(s):
+    n = len(s)
+    long_substr = ""
+    long_substr_len = 0
+    
+    def isNice(substring):
+        char_set = set(substring)
+        for c in substring:
+            if c.swapcase() not in char_set:
+                return False
+        return True
+    
+    for left in range(n):
+        for right in range(left + 1,n):
+            substr = s[left:right + 1]
+            # print(substr)
+            if isNice(substr) and right - left + 1 > long_substr_len:
+                print(substr)
+                long_substr_len = right - left + 1
+                long_substr = substr
+    return long_substr
+# print(longestNiceSubstring5("YazaAay"))
+def longestNiceSubstring6(s):
+    char_set = set(s)
+    
+    for i, char in enumerate(s):
+        if char.swapcase() not in char_set:
+            # recursively find nice string in left and right parts
+            left = longestNiceSubstring6(s[:i])
+            right = longestNiceSubstring6(s[i + 1:])
+            return left if len(left) >= len(right) else right
+    return s
+print(longestNiceSubstring6("YazaAay"))
