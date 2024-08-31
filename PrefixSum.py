@@ -84,4 +84,24 @@ def runningSum2(nums):
         nums[i] = nums[i - 1] + nums[i]
         i += 1
     return nums
-print(runningSum2([1,2,3,4]))
+# print(runningSum2([1,2,3,4]))
+def largestAltitude(gain):
+    n = len(gain)
+    altitude = [0] * (n + 1)
+    altitude[0] = 0
+    altitude[1] = gain[0]
+    
+    for i in range(2,n+ 1):
+        altitude[i] = altitude[i - 1] + gain[i - 1]
+    print(altitude)
+    return max(altitude)
+# print(largestAltitude( [-5,1,5,0,-7]))
+def largestAltitude2(gain):
+    max_altitude = 0
+    current_altitude = 0
+    
+    for g in gain:
+        current_altitude += g
+        max_altitude = max(max_altitude, current_altitude)
+    return max_altitude
+# print(largestAltitude2([-5,1,5,0,-7]))
