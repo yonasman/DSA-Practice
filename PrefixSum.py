@@ -165,3 +165,52 @@ def EquilibriumIndex2(nums):
         leftSum += nums[i]
     return -1
 # print(EquilibriumIndex2([1, 7, 3, 6, 5, 6]))
+def rangeSumQuery(nums,queries):
+    n = len(nums)
+    prefix_sum = [0] * n
+    prefix_sum[0] = nums[0]
+    
+    for i in range(1,n):
+        prefix_sum[i] = prefix_sum[i - 1] + nums[i]
+    
+    output = []
+    for q in queries:
+        if q[0] == 0:
+            output.append(prefix_sum[q[1]])
+        else:
+            current_query = prefix_sum[q[1]] - prefix_sum[q[0] - 1]
+            output.append(current_query)
+    return output
+# print(rangeSumQuery([1, 2, 3, 4, 5], [(1, 3), (2, 4), (0, 4)]))
+def count_subarrays_with_sum(nums, target):
+        n = len(nums)
+        # prefix_sum = [0] * n
+        targetSumCount = 0
+        
+        for i in range(n):
+            subArraySum = 0
+            for j in range(i,n):
+                subArraySum += nums[j]
+                if subArraySum == target:
+                    targetSumCount += 1
+        return targetSumCount
+# print(count_subarrays_with_sum([1, 2, 3, 4, 5],9))
+[1,3,6,10,19]
+def count_subarrays_with_sum2(nums, target):
+    target_count = 0
+    prefix_sum = 0
+    prefix_count_map = {0:1}
+    
+    for num in nums:
+        prefix_sum += num
+        
+        if prefix_sum - target in prefix_count_map:
+            target_count += prefix_count_map[prefix_sum - target]
+            
+        if prefix_sum in prefix_count_map:
+            prefix_count_map[prefix_sum] += 1
+        else:
+            prefix_count_map[prefix_sum] = 1
+            
+    return target_count
+# print(count_subarrays_with_sum2([1,2,3,4,5],9))
