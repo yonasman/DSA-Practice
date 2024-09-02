@@ -254,3 +254,94 @@ def maxSubArraySum3(nums):
         min_prefix_sum = min(min_prefix_sum, prefix_sum[j])
     return maxSum
 # print(maxSubArraySum3([1,-3,-5,4,5]))
+def rangeQuery(nums,queries):
+    n = len(nums)
+    prefixSum = [0] * n
+    prefixSum[0] = nums[0]
+    
+    for i in range(1,n):
+        prefixSum[i] = prefixSum[i - 1] + nums[i]
+        
+    output = []
+    for q in queries:
+        if q[0] == 0:
+            print(prefixSum[q[1]])
+            output.append(prefixSum[q[1]])
+        else:
+            output.append(prefixSum[q[1]] - prefixSum[q[0] - 1])
+    return output
+# print(rangeQuery([1, 3, 5, 7, 9],[(1, 3), (0, 4)]))
+def equilibriumIndex3(nums):
+    n = len(nums)
+    totalSum = sum(nums)
+    leftSum = 0
+    
+    for i in range(n):
+        rightSum = totalSum - leftSum - nums[i]
+        if leftSum == rightSum:
+            return i
+        leftSum += nums[i]
+    return -1
+# print(equilibriumIndex3([-7, 1, 5, 2, -4, 3, 0]))
+def subArraySumCountWithTarget(nums, target):
+    n = len(nums)
+    count = 0
+    
+    for i in range(n):
+        subArraySum = 0
+        for j in range(i,n):
+            subArraySum += nums[j]
+            if subArraySum == target:
+                count += 1
+    return count
+    # time complexity = o(n^2)
+    # space complexity = o(1)
+# print(subArraySumCountWithTarget([1,1,1],2))
+def subArraySumCountWithTarget2(nums,target):
+    n = len(nums)
+    prefix_sum = 0
+    prefix_sum_map = {0:1}
+    subArrayCount = 0
+    
+    for i in range(n):
+        prefix_sum += nums[i]
+        
+        if prefix_sum - target in prefix_sum_map:
+            subArrayCount += prefix_sum_map[prefix_sum - target]
+            
+        if prefix_sum in prefix_sum_map:
+            prefix_sum += 1
+        else:
+            prefix_sum = 1
+    return subArrayCount
+# print(subArraySumCountWithTarget2([1,1,1],2))
+def maxSubArrayWithinTarget(nums, target):
+    n = len(nums)
+    maxSum = float("-inf")
+    
+    for i in range(n):
+        currentSum = 0
+        for j in range(i,n):
+            currentSum += nums[j]
+            if currentSum <= target:
+                maxSum = max(maxSum, currentSum)
+    return maxSum if maxSum != float("-inf") else 0
+# print(maxSubArrayWithinTarget([2, 1, -3, 4, -1, 2, 1, -5, 4],7))
+def maxSubArrayWithinTarget2(nums,target):
+    prefix_sum = 0
+    prefix_sum_map = {0:0}
+    max_sum = float("-inf")
+    
+    for num in nums:
+        prefix_sum += num
+
+        for prev_sum in prefix_sum_map:
+            if prefix_sum - prev_sum <= target:
+                max_sum = max(max_sum, prefix_sum - prev_sum)
+    
+    if prefix_sum not in prefix_sum_map:
+        prefix_sum_map[prefix_sum] = 0
+    return max_sum if max_sum != float("-inf") else 0
+# print(maxSubArrayWithinTarget2([2, 1, -3, 4, -1, 2, 1, -5, 4],7))
+
+        
