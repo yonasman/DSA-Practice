@@ -214,3 +214,43 @@ def count_subarrays_with_sum2(nums, target):
             
     return target_count
 # print(count_subarrays_with_sum2([1,2,3,4,5],9))
+def maximumSubArraySum(nums):
+    n = len(nums)
+    if n == 0:
+        return 0
+    maxSum = float("-inf")
+    
+    for i in range(n):
+        currentSum = 0
+        for j in range(i,n):
+            currentSum += nums[j]
+            maxSum = max(currentSum, maxSum)
+            print(maxSum)
+    return maxSum
+# print(maximumSubArraySum([1,-3,-5,4,5]))
+def maxSubArraySum2(nums):
+    current_sum = nums[0]
+    max_sum = nums[0]
+    
+    for i in range(n):
+        current_sum = max(nums[i], current_sum + nums[i])
+        max_sum = max(current_sum, max_sum)
+    return max_sum
+# print(maxSubArraySum2([1,-3,-5,4,5]))
+
+def maxSubArraySum3(nums):
+    n = len(nums)
+    prefix_sum = [0] * n
+    prefix_sum[0] = nums[0]
+    maxSum = float("-inf")
+    min_prefix_sum = 0
+    
+    
+    for i in range(1,n):
+        prefix_sum[i] = prefix_sum[i - 1] + nums[i]
+    
+    for j in range(n):
+        maxSum = max(maxSum, prefix_sum[i] - min_prefix_sum)
+        min_prefix_sum = min(min_prefix_sum, prefix_sum[j])
+    return maxSum
+# print(maxSubArraySum3([1,-3,-5,4,5]))
