@@ -343,5 +343,38 @@ def maxSubArrayWithinTarget2(nums,target):
         prefix_sum_map[prefix_sum] = 0
     return max_sum if max_sum != float("-inf") else 0
 # print(maxSubArrayWithinTarget2([2, 1, -3, 4, -1, 2, 1, -5, 4],7))
-
-        
+def subArrayQueries(nums, queries):
+    n = len(nums)
+    prefix_sum = [0] * (n)
+    prefix_sum[0] = nums[0]
+    # [0,0,0,0,0,0]
+    for i in range(1,n):
+        prefix_sum[i] = prefix_sum[i - 1] + nums[i]
+    output = []
+    for L,R in queries:
+        L -= 1
+        R -= 1
+        if L == 0:
+            output.append(prefix_sum[R])
+        else:
+            output.append(prefix_sum[R] - prefix_sum[L - 1])
+    return output
+# print(subArrayQueries([1, 2, 3, 4, 5],[(1, 3), (2, 5), (1, 5)]))
+def prefix_sum2(matrix):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    
+    prefix_sum = [[0] * (cols + 1) for _ in range(rows + 1)]
+    for i in range(1,rows + 1):
+        for j in range(1, cols + 1):
+            prefix_sum[i][j] = matrix[i - 1][j - 1] + prefix_sum[i][j-1] + prefix_sum[i - 1][j] - prefix_sum[i - 1][j - 1]
+    
+    return prefix_sum
+def twoD_prefix_sum(prefix_sum2, r1,c1,r2,c2):
+    twoDSum = prefix_sum2[r2][c2] - prefix_sum2[r1-1][c1] - prefix_sum2[r1][c1 -1] + prefix_sum2[r1-1][c1-1]
+    return twoDSum
+print(twoD_prefix_sum(prefix_sum2([
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]),1,1,3,3))
