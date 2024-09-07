@@ -943,5 +943,5 @@ def kClosest2(points,k):
     distances.sort(key=lambda x:x[1])
     return [point for point,distance in distances[:k]]
 # print(kClosest2(points = [[3,3],[5,-1],[-2,4]], k = 2))
-        
+
     
