@@ -862,3 +862,50 @@ def min_subarray_len(nums,s):
             start += 1
     return min_length if min_length != "inf" else 0
 # print(min_subarray_len([2,3,1,2,4,3],7))
+def smallerThanCurrent(nums):
+    sortedNums = sorted(nums)
+    smallerCount = {}
+    
+    for i,num in enumerate(sortedNums):
+        if num not in smallerCount:
+            smallerCount[num] = i
+    result = [smallerCount[num] for num in nums]
+    return result
+# print(smallerThanCurrent([8,1,2,2,3]))
+def smallerThanCurrent2(nums):
+    n = len(nums)
+    d = {}
+    for num in nums:
+        d[num] = d.get(num,0) + 1
+    # print(d)
+    sortedNums = sorted(d.keys())
+    
+    cumulative_count = {}
+    cumulative_sum = 0
+    for n in sortedNums:
+        cumulative_count[n] = cumulative_sum
+        cumulative_sum += d[n]
+    print(cumulative_count)
+    output = []
+    for num in nums:
+        output.append(cumulative_count[num])
+    return output
+# print(smallerThanCurrent2([8,1,2,2,3]))
+def arrayIntersection(nums1, nums2):
+    nums1.sort()
+    nums2.sort()
+    p1,p2,n,m = 0,0,len(nums1), len(nums2)
+    output = []
+    
+    while p1 < n and p2 < m:
+        if nums1[p1] == nums2[p2]:
+            output.append(nums1[p1])
+            p1 += 1
+            p2 += 1
+        elif nums1[p1] > nums2[p2]:
+            p2 += 1
+        else:
+            p1 += 1
+    return output
+# print(arrayIntersection(nums1 = [4,9,5], nums2 = [9,4,9,8,4]))
+    
