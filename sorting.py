@@ -908,4 +908,28 @@ def arrayIntersection(nums1, nums2):
             p1 += 1
     return output
 # print(arrayIntersection(nums1 = [4,9,5], nums2 = [9,4,9,8,4]))
+def maxIceCream(costs, coins):
+    costs.sort()
+    count_of_ice_creams = 0
+    cost_of_ice_creams = 0
+    
+    for cost in costs:
+        if cost_of_ice_creams + cost < coins:
+            cost_of_ice_creams += cost
+            count_of_ice_creams += 1
+    return count_of_ice_creams
+# print(maxIceCream([1,6,3,1,2,5],20))
+def maxIceCream2(costs, coins):
+    costs.sort()
+    n = len(costs)
+    num_of_ice_creams = 0
+    for c in costs:
+        if c <= coins:
+            num_of_ice_creams += 1
+            coins -= c
+        elif c > coins or coins == 0:
+            break
+    return num_of_ice_creams
+print(maxIceCream2(costs = [10,6,8,7,7,8], coins = 5))
+    
     
