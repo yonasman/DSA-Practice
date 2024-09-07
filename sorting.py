@@ -921,7 +921,6 @@ def maxIceCream(costs, coins):
 # print(maxIceCream([1,6,3,1,2,5],20))
 def maxIceCream2(costs, coins):
     costs.sort()
-    n = len(costs)
     num_of_ice_creams = 0
     for c in costs:
         if c <= coins:
@@ -930,6 +929,19 @@ def maxIceCream2(costs, coins):
         elif c > coins or coins == 0:
             break
     return num_of_ice_creams
-print(maxIceCream2(costs = [10,6,8,7,7,8], coins = 5))
-    
+# print(maxIceCream2(costs = [10,6,8,7,7,8], coins = 5))
+import math
+def distanceFromOrigin(point):
+    d = math.sqrt((point[0]) ** 2 + (point[1]) ** 2)
+    return d
+def kClosest(points,k):
+    points.sort(key=distanceFromOrigin)
+    return points[:k]
+# print(kClosest( points = [[3,3],[5,-1],[-2,4]], k = 2))
+def kClosest2(points,k):
+    distances = [(point,math.sqrt(point[0]**2 + point[1] ** 2)) for point in points]
+    distances.sort(key=lambda x:x[1])
+    return [point for point,distance in distances[:k]]
+# print(kClosest2(points = [[3,3],[5,-1],[-2,4]], k = 2))
+        
     
