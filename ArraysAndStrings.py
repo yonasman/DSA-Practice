@@ -62,3 +62,31 @@ def twoSum2(nums,target):
         nums_dict[num] = i
     return []
 # print(twoSum2([3,2,4],6))
+def pivotIndex3(nums):
+    leftSum = 0
+    totalSum = sum(nums)
+    for i,num in enumerate(nums):
+        rightSum = totalSum - leftSum - num
+        if leftSum == rightSum:
+            return i
+        leftSum += num
+    return -1
+# print(pivotIndex3([1,7,3,6,5,6]))
+def maxSubArray(nums):
+    n = len(nums)
+    maxSum = float("-inf")
+    for i in range(n):
+        currentSum = 0
+        for j in range(i,n):
+            currentSum += nums[j]
+            maxSum = max(maxSum,currentSum)
+    return maxSum
+# print(maxSubArray([5,4,-1,7,8]))
+def maxSubArray2(nums):
+    currentSum = nums[0]
+    maxSum = nums[0]
+    for num in nums[1:]:
+        currentSum = max(num, currentSum + num)
+        maxSum = max(num, currentSum)
+    return maxSum
+# print(maxSubArray2([5,4,-1,7,8]))
