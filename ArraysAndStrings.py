@@ -90,3 +90,22 @@ def maxSubArray2(nums):
         maxSum = max(num, currentSum)
     return maxSum
 # print(maxSubArray2([5,4,-1,7,8]))
+def reverseString(s):
+    n = len(s)
+    p1 = 0
+    p2 = n - 1
+    while p1 < p2:
+        s[p1],s[p2] = s[p2],s[p1]
+        p1 += 1
+        p2 -= 1
+    print(s)
+# # reverseString(["h","e","l","l","o"])
+def isPalindrome(s):
+    alNum = "abcdefghijklmnopqrstuvwxyz1234567890"
+    filtered = [x.lower() for x in s if x.lower() in alNum]
+    return filtered == filtered[::-1]
+# print(isPalindrome("A man, a plan, a canal: Panama"))
+def isPalindrome2(s):
+    filtered = ''.join([x.lower() for x in s if x.isalnum()])
+    return filtered == filtered[::-1]
+# print(isPalindrome2("A man, a plan, a canal: Panama"))
