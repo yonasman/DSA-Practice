@@ -141,3 +141,37 @@ def longestCommonPrefix2(strs):
                 return strs[0][:i]
     return strs[0]
 # print(longestCommonPrefix2(["flower","flow","flight"]))
+def isValidAnagram(str1,str2):
+    dict1 = {}
+    dict2 = {}
+    for s in str1:
+        dict1[s] = dict1.get(s,0) + 1
+    for s in str2:
+        dict2[s] = dict2.get(s,0) + 1
+    return dict1 == dict2
+# print(isValidAnagram( "rat", "car"))
+def validAnagram(s,t):
+    if len(s) != len(t):
+        return False
+    
+    counter = {}
+    for str in s:
+        counter[str] = counter.get(str,0) + 1
+    for char in t:
+        if char not in counter:
+            return False
+        counter[char] -= 1
+        if counter[char] < 0:
+            return False
+    return True
+# print(validAnagram("rat", "car"))
+
+def groupAnagrams(strs):
+    anagrams = {}
+    for word in strs:
+        sorted_word = "".join(sorted(word))
+        if sorted_word not in anagrams:
+            anagrams[sorted_word] = []
+        anagrams[sorted_word].append(word)
+    return list(anagrams.values())
+print(groupAnagrams( ["eat","tea","tan","ate","nat","bat"]))
