@@ -109,3 +109,35 @@ def isPalindrome2(s):
     filtered = ''.join([x.lower() for x in s if x.isalnum()])
     return filtered == filtered[::-1]
 # print(isPalindrome2("A man, a plan, a canal: Panama"))
+def strStr(haystack,needle):
+    if needle in haystack:
+        return haystack.index(needle)
+    return -1
+# print(strStr("leetcode","leeto"))
+def longestCommonPrefix(strs):
+    if not strs:
+        return ""
+    
+    n = len(strs)
+    prefix = strs[0]
+    for i in range(1,n):
+        while not strs[i].startswith(prefix):
+            prefix = prefix[:-1]
+            if not prefix:
+                return ""
+    return prefix
+# print(longestCommonPrefix(strs = ["flower","flow","flight"]))
+def longestCommonPrefix2(strs):
+    # if strs is empty
+    if not strs:
+        return ""
+    
+    n = len(strs)
+    for i in range(len(strs[0])):
+        prefix = strs[0][i]
+        for j in range(1,n):
+            # if the length exceeds or mismatch found
+            if i >= len(strs[j]) or strs[j][i] != prefix:
+                return strs[0][:i]
+    return strs[0]
+# print(longestCommonPrefix2(["flower","flow","flight"]))
