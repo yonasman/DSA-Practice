@@ -174,4 +174,52 @@ def groupAnagrams(strs):
             anagrams[sorted_word] = []
         anagrams[sorted_word].append(word)
     return list(anagrams.values())
-print(groupAnagrams( ["eat","tea","tan","ate","nat","bat"]))
+# print(groupAnagrams( ["eat","tea","tan","ate","nat","bat"]))
+def longestSubstring(s):
+    if not s:
+        return 0
+    n = len(s)
+    p1 = 0
+    p2 = 0
+    maxLen = 0
+    while p1 < n and p2 < n:
+        if s[p2] not in s[p1:p2]:
+            maxLen = max(maxLen, p2 - p1 + 1)
+            p2 += 1
+        else:
+            p1 += 1
+    return maxLen
+# print(longestSubstring("bbbb"))
+def longestSubstring2(s):
+    if not s:
+        return 0
+    n = len(s)
+    left = 0
+    right = 0
+    maxLen = 0
+    seen = set() #abcb
+    while left < n and right < n:
+        if s[right] not in seen:
+            seen.add(s[right])
+            maxLen = max(maxLen, right - left + 1)
+            right += 1
+        else:
+            seen.remove(s[left])
+            left += 1
+    return maxLen
+# print(longestSubstring2("abcabcbb"))
+def longestSubstring3(s):
+    n = len(s)
+    if n == 0:
+        return 0
+    p1 = 0
+    seen = set()
+    maxLen = 0
+    for p2 in range(n):
+        while s[p2] in seen:
+            seen.remove(s[p1])
+            p1 += 1
+        seen.add(s[p2])
+        maxLen = max(maxLen, p2 - p1 + 1)
+    return maxLen
+# print(longestSubstring3("abcabcab"))
