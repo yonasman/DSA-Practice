@@ -223,3 +223,33 @@ def longestSubstring3(s):
         maxLen = max(maxLen, p2 - p1 + 1)
     return maxLen
 # print(longestSubstring3("abcabcab"))
+def containDuplicates(nums):
+    return len(set(nums)) != len(nums)
+# print(containDuplicates([1, 2, 3, 1]))
+def containDuplicates(nums):
+    seen = set()
+    for num in nums:
+        if num in seen:
+            return True
+        seen.add(num)
+    return False
+# print(containDuplicates([1, 2, 3]))
+def arrayIntersection(nums1,nums2):
+    intersection = list(set(nums1) & set(nums2))
+    return intersection
+# print(arrayIntersection(nums1 = [1, 2, 2, 1], nums2 = [2, 2]))
+def longestConsecutive(nums):
+    if not nums:
+        return 0
+    maxLength = 0
+    nums_set = set(nums)
+    for num in nums_set:
+        if num - 1 not in nums_set:
+            length = 1
+            current_num = num
+            while current_num + 1 in nums_set:
+                length += 1
+                current_num += 1
+            maxLength = max(maxLength, length)
+    return maxLength
+# print(longestConsecutive([100, 4, 200, 1, 3, 2]))
