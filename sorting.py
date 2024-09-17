@@ -943,5 +943,32 @@ def kClosest2(points,k):
     distances.sort(key=lambda x:x[1])
     return [point for point,distance in distances[:k]]
 # print(kClosest2(points = [[3,3],[5,-1],[-2,4]], k = 2))
-
-    
+# reviewing sorting algorithm
+def newBubbleSort(nums):
+    if not nums:
+        return nums
+    n = len(nums)
+    for i in range(n):
+        swapped = False
+        for j in range(1,n - i):
+            if nums[j - 1] > nums[j]:
+                nums[j - 1], nums[j] = nums[j], nums[j - 1]
+                swapped = True
+        if not swapped:
+            break
+    return nums
+# print(newBubbleSort([1,3,4,2,5]))
+# merge intervals
+def mergeIntervals(intervals):
+    if not intervals:
+        return []
+    intervals.sort(key=lambda x:x[0])
+    merged = [intervals[0]]
+    for current in intervals[1:]:
+        lastMerged = merged[-1]
+        if current[0] <= lastMerged[1]:
+            lastMerged[1] = max(lastMerged[1], current[1])
+        else:
+            merged.append(current)
+    return merged
+# print(mergeIntervals([[1,4],[5,6]]))
