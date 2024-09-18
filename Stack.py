@@ -151,4 +151,57 @@ def makeGood(s):
     # join the chars in the stack to form the resulting string and return it
     return ''.join(stack)
 # print(makeGood("s"))
-            
+def simplifyPath(path):
+    stack = []
+    pathComponents = path.split('/')
+    for component in pathComponents:
+        if component == '' or component == '.':
+            continue
+        elif component == "..":
+            if stack:
+                stack.pop()
+        else:
+            stack.append(component)
+    return '/' + '/'.join(stack)
+# print(simplifyPath("/.../a/../b/c/../d/./"))
+def evalRPN(tokens):
+    # initialize a stack to perform the operation
+    stack = []
+    for token in tokens:
+        if token == '+':
+            stack[-2] = stack[-2] + stack[-1]
+            stack.pop()
+        elif token == '-':
+            stack[-2] = stack[-2] - stack[-1]
+            stack.pop()
+        elif token == '*':
+            stack[-2] = stack[-2] * stack[-1]
+            stack.pop()
+        elif token == '/':
+            stack[-2] = int(stack[-2] / stack[-1])
+            stack.pop()
+        else:
+            stack.append(int(token))
+    return stack[-1]
+# print(evalRPN(["10","6","9","3","+","-11","*","/","*","17","+","5","+"]))
+def evalRPN2(tokens):
+    stack = []
+    for token in tokens:
+        if token not in {'+','-','*','/'}:
+            stack.append(int(token))
+        else:
+            num1 = int(stack.pop())
+            num2 = int(stack.pop())
+            if token == '+':
+                stack.append(num1 + num2)
+            elif token == '-':
+                stack.append(num2 - num1)
+            elif token == '*':
+                stack.append(num1 * num2)
+            else:
+                if num2 * num1 < 0 and num2 % num1 != 0:
+                    stack.append((num2 // num1) + 1)
+                else:
+                    stack.append(num2 // num1)
+    return stack[-1]
+# print(evalRPN2(["10","6","9","3","+","-11","*","/","*","17","+","5","+"]))
