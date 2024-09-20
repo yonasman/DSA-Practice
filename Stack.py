@@ -205,3 +205,30 @@ def evalRPN2(tokens):
                     stack.append(num2 // num1)
     return stack[-1]
 # print(evalRPN2(["10","6","9","3","+","-11","*","/","*","17","+","5","+"]))
+# backspace
+def backspaceCompare(s,t):
+    stack1 = []
+    stack2 = []
+    for char in s:
+        if stack1 and char == "#":
+            stack1.pop()
+        elif char != '#':
+            stack1.append(char)
+    for c in t:
+        if stack2 and c == "#":
+            stack2.pop()
+        elif c != '#':
+            stack2.append(c)
+    return stack1 == stack2
+# print(backspaceCompare("y#fo##f","y#f#o##f"))
+def removeDuplicates(s):
+    # "abbaca"
+    # for keeping track of unique strings
+    stack = []
+    for c in s:
+        if stack and stack[-1] == c:
+            stack.pop()
+        else:
+            stack.append(c)
+    return ''.join(stack)
+# print(removeDuplicates("azxxzy"))
