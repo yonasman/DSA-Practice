@@ -747,3 +747,32 @@ def minSteps(s,t):
             minSteps += hashMapS[key]
     return minSteps
 # print(minSteps( s = "leetcode", t = "practice"))
+def corpFlightBookings(bookings,n):
+    answer = [0] * (n + 1)
+    for first,last,seats in bookings:
+        answer[first - 1] += seats
+        answer[last] -= seats
+    print(answer)
+    for i in range(1,len(answer)):
+        answer[i] += answer[i - 1]
+    return answer[:n]
+# print(corpFlightBookings([[1,2,10],[2,3,20],[2,5,25]],5))
+def corpFlightBookings2(bookings, n):
+    answer = [0] * (n + 1)
+    for first,last,seats in bookings:
+        for i in range(first,last + 1):
+            answer[i - 1] += seats
+    return answer[:n]
+# print(corpFlightBookings2([[1,2,10],[2,3,20],[2,5,25]],5))
+def numOfPairs(nums,target):
+    num_of_pairs = 0
+    n = len(nums)
+    for i in range(n):
+        num = nums[i]
+        if target.startswith(num):
+            remaining = target[len(num):]
+            for j in range(n):
+                if i != j and remaining == nums[j]:
+                    num_of_pairs += 1
+    return num_of_pairs
+print(numOfPairs(nums = ["1","1","1"], target = "11"))
