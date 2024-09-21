@@ -680,4 +680,70 @@ def productExceptSelf3(nums):
         output[j] *= suffix
         suffix *= nums[j]
     return output
-print(productExceptSelf3([-1,1,0,-3,3]))
+# print(productExceptSelf3([-1,1,0,-3,3]))
+def pivotArray(nums, pivot):
+    # lists to store respective elements
+    less = []
+    equal = []
+    greater = []
+    for num in nums:
+        if num < pivot:
+            less.append(num)
+        elif num > pivot:
+            greater.append(num)
+        else:
+            equal.append(num)
+    return less + equal + greater
+# print(pivotArray(nums = [9,12,5,10,14,3,10], pivot = 10))
+def pivotArray2(nums, pivot):
+    n = len(nums)
+    output = [0] * n
+    left = 0
+    # build the left elements
+    for num in nums:
+        if num < pivot:
+            output[left] = num
+            left += 1
+    # build the equal
+    right = left
+    for num in nums:
+        if num == pivot:
+            output[right] = num
+            right += 1
+    # build the greater elements
+    for num in nums:
+        if num > pivot:
+            output[right] = num
+            right += 1
+    return output
+# print(pivotArray2([9,12,5,10,14,3,10], 10))
+def maxArea(nums):
+    n = len(nums)
+    max_area = 0
+    left = 0
+    right = n - 1
+    while left < right:
+        current_area = min(nums[left], nums[right]) * (right - left)
+        max_area = max(current_area, max_area)
+        if nums[left] < nums[right]:
+            left += 1
+        else:
+            right -= 1
+    return max_area
+# print(maxArea([1,1]))
+def minSteps(s,t):
+    hashMapS = {}
+    hashMapT = {}
+    minSteps = 0
+    for c in s:
+        hashMapS[c] = hashMapS.get(c,0) + 1
+    for c in t:
+        hashMapT[c] = hashMapT.get(c,0) + 1
+        
+    for key in hashMapS:
+        if key in hashMapT:
+            minSteps += max(0, hashMapS[key] - hashMapT[key])
+        else:
+            minSteps += hashMapS[key]
+    return minSteps
+# print(minSteps( s = "leetcode", t = "practice"))
