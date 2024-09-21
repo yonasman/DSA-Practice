@@ -615,3 +615,69 @@ def kClosest(points,k):
     distances.sort(key=lambda x:x[1])
     return [point for point, distance in distances[:k]]
 # print(kClosest(points = [[3,3],[5,-1],[-2,4]], k = 2))
+# a2sv problems
+from collections import Counter
+def findLHS(nums):
+    maxHarmoniousLen = 0
+    hashMap = {}
+    for num in nums:
+        hashMap[num] = hashMap.get(num,0) + 1
+    for num in nums:
+        if num + 1 in hashMap:
+            maxHarmoniousLen = max(maxHarmoniousLen, hashMap[num] + hashMap[num + 1])
+    return maxHarmoniousLen
+# print(findLHS([1,3,2,2,5,2,3,7]))
+def leftRightDifference(nums):
+    n = len(nums)
+    leftSum = [0] * n
+    rightSum = [0] * n
+    output = []
+    for i in range(1,n):
+        leftSum[i] = leftSum[i - 1] + nums[i-1]
+    for j in range(n - 2,-1,-1):
+        rightSum[j] = rightSum[j + 1] + nums[j + 1] 
+    for k in range(n):
+        output.append(abs(leftSum[k] - rightSum[k]))
+    return output
+# print(leftRightDifference([1]))
+def leftRightDifference(nums):
+    n = len(nums)
+    leftSum = 0
+    totalSum = sum(nums)
+    output = []
+    for i in range(n):
+        rightSum = totalSum - leftSum - nums[i]
+        output.append(abs(leftSum - rightSum))
+        leftSum += nums[i]
+    return output
+# print(leftRightDifference([10,4,8,3]))
+def productExceptSelf(nums):
+    totalProduct = math.prod(nums)
+    output = []
+    for num in nums:
+        output.append(int(totalProduct / num) )
+    return output
+# print(productExceptSelf([1,2,3,4]))
+def productExceptSelf2(nums):
+    output = []
+    for i in range(len(nums)):
+        prefixProd = math.prod(nums[:i])
+        suffixProd = math.prod(nums[i+1:])
+        output.append(prefixProd * suffixProd)
+    return output
+# print(productExceptSelf2([-1,1,0,-3,3]))
+def productExceptSelf3(nums):
+    n = len(nums)
+    output = [1] * n
+    # prefix products
+    prefix = 1
+    for i in range(n):
+        output[i] = prefix
+        prefix *= nums[i]
+    # suffix products
+    suffix = 1
+    for j in range(n - 1,-1,-1):
+        output[j] *= suffix
+        suffix *= nums[j]
+    return output
+print(productExceptSelf3([-1,1,0,-3,3]))
