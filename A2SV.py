@@ -775,4 +775,45 @@ def numOfPairs(nums,target):
                 if i != j and remaining == nums[j]:
                     num_of_pairs += 1
     return num_of_pairs
-print(numOfPairs(nums = ["1","1","1"], target = "11"))
+# print(numOfPairs(nums = ["1","1","1"], target = "11"))
+def maxProfit(prices):
+    if not prices:
+        return 0
+    min_price = float("inf")
+    max_profit = 0
+    for price in prices:
+        if price < min_price:
+            min_price = price
+        else:
+            max_profit = max(max_profit, price - min_price)
+    return max_profit
+# print(maxProfit([7,6,4,3,1]))
+#A2SV question-1
+# ***************
+#Convert the Temperature
+def convertTemperature2(celsius):
+    kelvin = 273.15 + celsius
+    fahrenheit = celsius * 1.80 + 32.00
+    return [kelvin, fahrenheit]
+# print(convertTemperature2(celsius = 36.50))
+# Fizz Buzz
+#***************************
+def fizzBuzz(n):
+    output = []
+    for i in range(1,n + 1):
+        if i % 3 == 0 and i % 5 == 0:
+            output.append("FizzBuzz")
+        elif i % 3 == 0:
+            output.append("Fizz")
+        elif i % 5 == 0:
+            output.append("Buzz")
+        else:
+            output.append(f'{i}')
+    return output
+# print(fizzBuzz(3))
+def smallestEvenMultiple(n):
+    if n % 2 == 0:
+        return n
+    else:
+        return n *2
+# print(smallestEvenMultiple(6))
