@@ -817,3 +817,37 @@ def smallestEvenMultiple(n):
     else:
         return n *2
 # print(smallestEvenMultiple(6))
+# number of good pairs
+def numIdenticalPairs(nums):
+    n = len(nums)
+    numOfPairs = 0
+    for i in range(n):
+        for j in range(i+1,n):
+            if nums[i] == nums[j]:
+                numOfPairs += 1
+    return numOfPairs
+# print(numIdenticalPairs([1,2,3,1,1,3]))
+# using hashmap
+def numIdenticalPairs2(nums):
+    [1,2,3]
+    numOfPairs = 0
+    hashMap = {}
+    for num in nums:
+        hashMap[num] = hashMap.get(num,0) + 1
+    for value in hashMap.values():
+        if value > 1:
+            numOfPairs += (value * (value - 1)) // 2
+    return numOfPairs
+# print(numIdenticalPairs2([1,1,1,1]))
+# way3
+def numIdenticalPairs3(nums):
+    hashMap = {}
+    numOfPairs = 0
+    for num in nums:
+        if num in hashMap:
+            numOfPairs += hashMap[num]
+            hashMap[num] += 1
+        else:
+            hashMap[num] = 1
+    return numOfPairs
+# print(numIdenticalPairs3([1,1,1,1]))
