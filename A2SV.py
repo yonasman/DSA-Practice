@@ -829,7 +829,6 @@ def numIdenticalPairs(nums):
 # print(numIdenticalPairs([1,2,3,1,1,3]))
 # using hashmap
 def numIdenticalPairs2(nums):
-    [1,2,3]
     numOfPairs = 0
     hashMap = {}
     for num in nums:
@@ -851,3 +850,19 @@ def numIdenticalPairs3(nums):
             hashMap[num] = 1
     return numOfPairs
 # print(numIdenticalPairs3([1,1,1,1]))
+def finalValueAfterOperations(operations):
+    x = 0
+    for operation in operations:
+        if '+' in operation:
+            x += 1
+        else:
+            x -= 1
+    return x
+# print(finalValueAfterOperations(["X++","++X","--X","X--"]))
+def arithmeticTriplets(nums,diff):
+    numOfTriplets = 0
+    for num in nums:
+        if (num - diff) in nums and (num + diff) in nums:
+            numOfTriplets += 1
+    return numOfTriplets
+# print(arithmeticTriplets(nums = [4,5,6,7,8,9], diff = 2))
