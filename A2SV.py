@@ -887,8 +887,6 @@ def isValid(s):
     return len(stack) == 0
 # print(isValid("[]"))
 class Solution:
-    def __init__(self) -> None:
-        pass
     def backspaceString(self,s,t):
         def processString(s):
             output = []
