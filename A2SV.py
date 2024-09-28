@@ -866,3 +866,40 @@ def arithmeticTriplets(nums,diff):
             numOfTriplets += 1
     return numOfTriplets
 # print(arithmeticTriplets(nums = [4,5,6,7,8,9], diff = 2))
+def isValid(s):
+    if len(s) < 2:
+        return False
+    parenthesisPair = {
+        ']':'[',
+        '}' : '{',
+        ')' : '('
+    }
+    stack = []
+    for p in s:
+        if p not in parenthesisPair:
+            stack.append(p)
+        else:
+            if not stack:
+                return False
+            popped_ele = stack.pop()
+            if popped_ele != parenthesisPair[p]:
+                return False
+    return len(stack) == 0
+# print(isValid("[]"))
+class Solution:
+    def __init__(self) -> None:
+        pass
+    def backspaceString(self,s,t):
+        def processString(s):
+            output = []
+            for char in s:
+                if output and char == "#":
+                    output.pop()
+                elif char != "#":
+                    output.append(char)
+            return ''.join(output)
+        return processString(s) == processString(t)
+string1 = Solution()
+# string2 = Solution()
+# print(string1.backspaceString("ab#c","ad#c"))
+
