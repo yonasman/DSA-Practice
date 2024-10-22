@@ -972,3 +972,34 @@ def mergeIntervals(intervals):
             merged.append(current)
     return merged
 # print(mergeIntervals([[1,4],[5,6]]))
+def bubbleSortPractice(nums):
+    if not nums:
+        return nums
+    n = len(nums)
+    for i in range(n):
+        swapped = False
+        for j in range( n - i - 1):
+            if nums[j] > nums[j+1]:
+                nums[j], nums[j+1] = nums[j+1],nums[j]
+                swapped = True
+                # temp = nums[j]
+                # nums[j] = nums[j + 1]
+                # nums[j+1] = temp
+        if not swapped:
+            print("already sorted")
+            return nums
+    return nums
+# print(bubbleSortPractice([1,2,3,4]))
+def sortPeople(names, heights):
+    n = len(heights)
+    for i in range(n):
+        swapped = False
+        for j in range(n - i - 1):
+            if heights[j] < heights[j+1]:
+                swapped = True
+                heights[j],heights[j+1] = heights[j+1], heights[j]
+                names[j], names[j+1] = names[j+1],names[j]
+        if not swapped:
+            return names
+    return names
+# print(sortPeople(names = ["Mary","John","Emma"], heights = [180,165,170]))
