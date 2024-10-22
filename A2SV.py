@@ -900,4 +900,7 @@ class Solution:
 string1 = Solution()
 # string2 = Solution()
 # print(string1.backspaceString("ab#c","ad#c"))
+for i in range(1):
+    for j in range(1,6):
+        print('*' * j)
 
