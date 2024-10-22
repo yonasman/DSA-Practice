@@ -1003,3 +1003,68 @@ def sortPeople(names, heights):
             return names
     return names
 # print(sortPeople(names = ["Mary","John","Emma"], heights = [180,165,170]))
+def countSwaps(nums):
+    numOfSwaps = 0
+    n = len(nums)
+    for i in range(n):
+        swapped = False
+        for j in range(n - i -1):
+            if nums[j] > nums[j + 1]:
+                swapped = True
+                numOfSwaps += 1
+                nums[j], nums[j+1] = nums[j+1],nums[j]
+        if not swapped:
+            return numOfSwaps
+    return numOfSwaps
+# print(countSwaps([1,2,3]))
+def sortAndPreserve(tuples):
+    n = len(tuples)
+    for i in range(n):
+        swapped  = False
+        for j in range(n - i - 1):
+            if tuples[j][1] > tuples[j+1][1]:
+                swapped = True
+                tuples[j],tuples[j+1] = tuples[j+1],tuples[j]
+        if not swapped:
+            return tuples
+    return tuples
+# print(sortAndPreserve([('Alice', 2), ('Bob', 3), ('Charlie', 2)]))    
+def isAlreadySorted(nums):
+    n = len(nums)
+    for i in range(n):
+        swapped = False
+        for j in range(n - i - 1):
+            if nums[j] > nums[j + 1]:
+                swapped = True
+        # Check if no swaps were made in the inner loop
+        if not swapped:
+            return True  # List is already sorted
+    return False  # If we finish the loops without early return, the list is not sorted
+# print(isAlreadySorted([3,2,1]))
+def kth_largest_element(nums,k):
+    n = len(nums)
+    for i in range(n):
+        for j in range(n - i - 1):
+            if nums[j] > nums[j + 1]:
+                nums[j], nums[j+1] = nums[j+1],nums[j]
+        if k - 1 == i:
+            return nums[n - k]
+# print(kth_largest_element([3, 2, 3, 1, 2, 4, 5, 5, 6], 4))
+def sortByLength(strings):
+    n = len(strings)
+    for i in range(n):
+        for j in range(n - i - 1):
+            if len(strings[j]) > len(strings[j+1]):
+                strings[j], strings[j+1] = strings[j+1],strings[j]
+    return strings
+# print(sortByLength(["apple", "fig", "banana", "grape"]))
+def compare(nums,j):
+    if nums[j] > nums[j+1]:
+        nums[j],nums[j+1] = nums[j+1],nums[j]
+def sortWithFunction(nums,comparisonFunc):
+    n = len(nums)
+    for i in range(n):
+        for j in range(n - i - 1):
+            comparisonFunc(nums,j)
+    return nums
+print(sortWithFunction([5, 2, 9, 1],compare))
