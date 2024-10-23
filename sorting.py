@@ -1067,4 +1067,36 @@ def sortWithFunction(nums,comparisonFunc):
         for j in range(n - i - 1):
             comparisonFunc(nums,j)
     return nums
-print(sortWithFunction([5, 2, 9, 1],compare))
+# print(sortWithFunction([5, 2, 9, 1],compare))
+# selection sort
+def selectionSortPractice(nums):
+    n = len(nums)
+    for i in range(n):
+        min_idx = i
+        swapped = False
+        for j in range(i+1,n):
+            if nums[min_idx] > nums[j]:
+                swapped = True
+                min_idx = j
+        if not swapped:
+            print("Already sorted")
+            return nums
+        nums[i],nums[min_idx] = nums[min_idx],nums[i]
+    return nums
+# print(selectionSortPractice([1,2,3,4]))
+def sortByFrequency(s):
+    freq = {}
+    for c in s:
+        freq[c] = freq.get(c,0) + 1
+    # sort based on frequency of chars
+    chars = list(s)
+    n = len(chars)
+    for i in range(n):
+        max_count = i
+        for j in range(i+1,n):
+            if freq[chars[j]] > freq[chars[max_count]] or freq[chars[j]] == freq[chars[max_count]]:
+                max_count = j
+        chars[i],chars[max_count] = chars[max_count],chars[i]
+    return ''.join(chars)
+print(sortByFrequency("tree"))
+
