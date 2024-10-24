@@ -1159,3 +1159,15 @@ def max_num_after_k_swaps(s,k):
         nums[i],nums[max_idx] = nums[max_idx],nums[i]
     return ''.join(nums)
 # print(max_num_after_k_swaps(s = "2736", k = 2))
+def find_duplicate(nums):
+    n = len(nums)
+    for i in range(n):
+        min_idx = i
+        for j in range(i+1,n):
+            if nums[min_idx] > nums[j]:
+                min_idx = j
+        nums[i],nums[min_idx] = nums[min_idx],nums[i]
+    for i in range(1,n):
+        if nums[i] == nums[i - 1]:
+            return nums[i]
+# print(find_duplicate([1, 3, 4, 2, 2]))
