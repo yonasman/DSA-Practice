@@ -1269,4 +1269,25 @@ def max_gap_of_sorted_array(nums):
     for i in range(1,n):
         maxGap = max(maxGap, nums[i] - nums[i - 1])
     return maxGap
-print(max_gap_of_sorted_array([3,5,9,1]))
+# print(max_gap_of_sorted_array([3,5,9,1]))
+def mergeIntervals(intervals):
+    n = len(intervals)
+    # sort the intervals based on the first index
+    for i in range(1,n):
+        key = intervals[i]
+        j = i - 1
+        while j >= 0 and key[0] < intervals[j][0]:
+            intervals[j+1] = intervals[j]
+            j -= 1
+        intervals[j+1] = key
+    
+    result = [intervals[0]]
+    for i in range(1,n):
+        last_interval = result[-1]
+        if intervals[i][0] < last_interval[1]:
+            last_interval[1] = max(last_interval[1],intervals[i][1])
+        else:
+            result.append(intervals[i])
+    return result
+# print(mergeIntervals([[1,3],[2,6],[8,10],[15,18]]))
+        
