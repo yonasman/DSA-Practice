@@ -1192,4 +1192,29 @@ def sort_2D_matrix(matrix):
                     min_idx = j
             nums[i], nums[min_idx] = nums[min_idx], nums[i]
     return matrix
-print(sort_2D_matrix([[3, 2, 1], [5, 6, 4]]))
+# print(sort_2D_matrix([[3, 2, 1], [5, 6, 4]]))
+# insertion sort
+def insertionSortPractice(nums):
+    n = len(nums)
+    for i in range(1,n):
+        key = nums[i]
+        j = i - 1
+        while j >= 0 and key < nums[j]:
+            nums[j+1] = nums[j]
+            j -= 1
+        nums[j + 1] = key
+    return nums
+# print(insertionSortPractice([4,2,1,3]))
+def number_of_moves(nums):
+    n = len(nums)
+    moves = 0
+    for i in range(1,n):
+        key = nums[i]
+        j = i - 1
+        while j >= 0 and key < nums[j]:
+            nums[j+1] = nums[j]
+            moves += 1
+            j -= 1
+        nums[j+1] = key
+    return moves
+# print(number_of_moves([1,2,3]))
