@@ -1218,3 +1218,41 @@ def number_of_moves(nums):
         nums[j+1] = key
     return moves
 # print(number_of_moves([1,2,3]))
+def largest_number_after_mutation(nums,mutations):
+    mutation_dict = {a:b for a,b in mutations}
+    # apply the mutations
+    mutation_nums = [mutation_dict.get(num,num) for num in nums]
+    n = len(mutation_nums)
+    for i in range(1,n):
+        key = mutation_nums[i]
+        j = i - 1
+        while j >= 0 and key < mutation_nums[j]:
+            mutation_nums[j+1] = mutation_nums[j]
+            j -= 1
+        mutation_nums[j+1] = key
+    return mutation_nums
+# print(largest_number_after_mutation(nums = [9, 8, 7],mutations = [(9, 1), (8, 5), (7, 2)]))
+def relative_sort_array(arr1,arr2):
+    unique = []
+    result = []
+    count = {}
+    for num in arr1:
+        count[num] = count.get(num,0) + 1
+    for num in arr2:
+        if num in count:
+            result.extend([num] * count[num])
+            del count[num]
+    for num,freq in count.items():
+        unique.extend([num] * freq)
+    
+    # sort unique elements of arr1
+    n = len(unique)
+    for i in range(1,n):
+        key = unique[i]
+        j = i - 1
+        while j >= 0 and key < unique[j]:
+            unique[j+1] = unique[j]
+            j -= 1
+        unique[j+1] = key
+    return result + unique
+# print(relative_sort_array(arr1 = [28,6,22,8,44,17], arr2 = [22,28,8,6]))
