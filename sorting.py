@@ -1094,9 +1094,68 @@ def sortByFrequency(s):
     for i in range(n):
         max_count = i
         for j in range(i+1,n):
-            if freq[chars[j]] > freq[chars[max_count]] or freq[chars[j]] == freq[chars[max_count]]:
+            if freq[chars[j]] > freq[chars[max_count]] or freq[chars[j]] == freq[chars[max_count]] and chars[j] < chars[max_count]:
                 max_count = j
         chars[i],chars[max_count] = chars[max_count],chars[i]
     return ''.join(chars)
-print(sortByFrequency("tree"))
+# print(sortByFrequency("tree"))
+def kth_element_selection_sort(nums,k):
+    n = len(nums)
+    for i in range(k):
+        min_idx = i
+        for j in range(i+1,n):
+            if nums[min_idx] > nums[j]:
+                min_idx = j
+        nums[i],nums[min_idx] = nums[min_idx],nums[i]
+    return nums[k-1]
+# print(kth_element_selection_sort(nums = [3, 2, 1, 5, 6, 4], k = 2))         
+def sort_tuple_scores(students):
+    n = len(students)
+    for i in range(n):
+        min_idx = i
+        for j in range(i+1,n):
+            if students[min_idx][1] > students[j][1]:
+                min_idx = j
+        students[i], students[min_idx] = students[min_idx], students[i]
+    return students
+# print(sort_tuple_scores([("Alice", 85), ("Bob", 90), ("Charlie", 80)]))
+def sort_even_odd_indices(nums):
+    n = len(nums)
+    even = [nums[i] for i in range(0,n,2)]
+    odd = [nums[i] for i in range(1,n,2)]
 
+    for i in range(len(even)):
+        min_idx = i
+        for j in range(i+1,len(even)):
+            if even[min_idx] > even[j]:
+                min_idx = j
+        even[i],even[min_idx] = even[min_idx],even[i]
+    for i in range(len(odd)):
+        max_idx = i
+        for j in range(i+1,len(odd)):
+            if odd[max_idx] < odd[j]:
+                max_idx = j
+        odd[i],odd[max_idx] = odd[max_idx],odd[i]
+    result = []
+    even_idx = 0
+    odd_idx = 0
+    for i in range(n):
+        if i % 2 == 0:
+            result.append(even[even_idx])
+            even_idx += 1
+        else:
+            result.append(odd[odd_idx])
+            odd_idx += 1
+    return result
+# print(sort_even_odd_indices( [4, 3, 1, 2, 5]))
+def max_num_after_k_swaps(s,k):
+    nums = [num for num in s]
+    n = len(nums)
+    for i in range(k):
+        max_idx = i
+        for j in range(i+1,n):
+            if int(nums[max_idx]) < int(nums[j]):
+                max_idx = j
+        nums[i],nums[max_idx] = nums[max_idx],nums[i]
+    return ''.join(nums)
+# print(max_num_after_k_swaps(s = "2736", k = 2))
