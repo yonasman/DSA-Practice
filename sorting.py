@@ -1171,3 +1171,25 @@ def find_duplicate(nums):
         if nums[i] == nums[i - 1]:
             return nums[i]
 # print(find_duplicate([1, 3, 4, 2, 2]))
+def smallest_num_after_k_swaps(s,k):
+    nums = [num for num in s]
+    n = len(nums)
+    for i in range(k):
+        max_idx = i
+        for j in range(i+1,n):
+            if nums[max_idx] > nums[j]:
+                max_idx = j
+        nums[i], nums[max_idx] = nums[max_idx], nums[i]
+    return ''.join(nums)
+# print(smallest_num_after_k_swaps("4321",1))
+def sort_2D_matrix(matrix):
+    n = len(matrix)
+    for nums in matrix:
+        for i in range(len(nums)):
+            min_idx = i
+            for j in range(i+1,len(nums)):
+                if nums[min_idx] > nums[j]:
+                    min_idx = j
+            nums[i], nums[min_idx] = nums[min_idx], nums[i]
+    return matrix
+print(sort_2D_matrix([[3, 2, 1], [5, 6, 4]]))
