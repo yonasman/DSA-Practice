@@ -1256,3 +1256,17 @@ def relative_sort_array(arr1,arr2):
         unique[j+1] = key
     return result + unique
 # print(relative_sort_array(arr1 = [28,6,22,8,44,17], arr2 = [22,28,8,6]))
+def max_gap_of_sorted_array(nums):
+    n = len(nums)
+    maxGap = 0
+    for i in range(1,n):
+        key = nums[i]
+        j = i - 1
+        while j >= 0 and key < nums[j]:
+            nums[j+1] = nums[j]
+            j -= 1
+        nums[j+1] = key
+    for i in range(1,n):
+        maxGap = max(maxGap, nums[i] - nums[i - 1])
+    return maxGap
+print(max_gap_of_sorted_array([3,5,9,1]))
