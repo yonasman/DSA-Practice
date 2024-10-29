@@ -1290,4 +1290,27 @@ def mergeIntervals(intervals):
             result.append(intervals[i])
     return result
 # print(mergeIntervals([[1,3],[2,6],[8,10],[15,18]]))
-        
+# counting sort
+def countingSortPractice(nums):
+    n = len(nums)
+    max_ele = max(nums)
+    # create a count array to store the count of individual elements
+    countArr = [0] * (max_ele + 1)
+    # store the count of each element
+    for num in nums:
+        countArr[num] += 1
+    # calculate the cumulative sum
+    for i in range(1,max_ele + 1):
+        countArr[i] += countArr[i - 1]
+    # sorted output array
+    output = [0] * n
+    i = n - 1
+    while i >= 0:
+        output[countArr[nums[i]] - 1] = nums[i]
+        countArr[nums[i]] -= 1
+        i -= 1
+    # for num in nums:
+    #     output[countArr[num] - 1] = num
+    #     countArr[num] -= 1
+    return output
+# print(countingSortPractice([1,4,1,2,7,5,2]))
