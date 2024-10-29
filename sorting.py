@@ -1314,3 +1314,25 @@ def countingSortPractice(nums):
     #     countArr[num] -= 1
     return output
 # print(countingSortPractice([1,4,1,2,7,5,2]))
+def countingArrPractice2(nums):
+    # Find the max, min, and range of the array
+    max_ele = max(nums)
+    min_ele = min(nums)
+    ele_range = max_ele - min_ele + 1
+    n = len(nums)
+    # initialize count and output array
+    count = [0] * (ele_range)
+    output = [0] * n
+    
+    # count the frequency of each element
+    for num in nums:
+        count[num - min_ele] += 1
+    # calculate the cumulative sum
+    for i in range(1,ele_range):
+        count[i] += count[i - 1]
+    # build the output array
+    for i in range(n - 1,-1,-1):
+        output[count[nums[i] - min_ele] - 1] = nums[i]
+        count[nums[i] - min_ele] -= 1
+    return output
+# print(countingArrPractice2([1,4,1,2,7,5,2]))
