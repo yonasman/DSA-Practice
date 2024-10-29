@@ -1449,3 +1449,21 @@ def relative_sort_count(arr1,arr2):
     return output
 # print(relative_sort_count(arr1 = [2, 1, 2, 5, 7, 1, 4, 1],
 # arr2 = [2, 1, 3, 4]))
+def K_th_largest_count(nums,k):
+    n = len(nums)
+    max_num = max(nums)
+    count = [0] * (max_num + 1)
+    # count the freq
+    for num in nums:
+        count[num] += 1
+    # build cumulative count
+    for i in range(1,max_num + 1):
+        count[i] += count[i - 1]
+    # build the output
+    output = [0] * n
+    for i in range(n - 1,-1,-1):
+        position = count[nums[i]] - 1
+        output[position] = nums[i]
+        count[nums[i]] -= 1
+    return output[::-1][k-1]
+# print(K_th_largest_count(nums = [3,2,1,5,6,4], k = 2))0
