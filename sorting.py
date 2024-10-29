@@ -1429,3 +1429,23 @@ def maxGapCounting(nums):
         max_gap = max(sortedNums[i] - sortedNums[i-1],max_gap)
     return max_gap
 # print(maxGapCounting([3,6,9,1,15]))
+from collections import Counter
+def relative_sort_count(arr1,arr2):
+    common = []
+    unique = []
+    for num in arr1:
+        if num not in arr2:
+            unique.append(num)
+        else:
+            common.append(num)
+    # build the freq hashmap
+    count = Counter(common)
+    # output array
+    output = []
+    for num in arr2:
+        output.extend([num] * count[num])
+    remaining_ele = sorted(unique)
+    output.extend(remaining_ele)
+    return output
+# print(relative_sort_count(arr1 = [2, 1, 2, 5, 7, 1, 4, 1],
+# arr2 = [2, 1, 3, 4]))
