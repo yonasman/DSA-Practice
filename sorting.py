@@ -1336,3 +1336,26 @@ def countingArrPractice2(nums):
         count[nums[i] - min_ele] -= 1
     return output
 # print(countingArrPractice2([1,4,1,2,7,5,2]))
+def sortPeopleCount(names, heights):
+        n = len(heights)
+        max_ele = max(heights)
+        # initialize count array
+        countArr = [0] * (max_ele + 1)
+        # store the frequency of heights
+        for height in heights:
+            countArr[height] += 1
+        # build a cumulative sum
+        for i in range(1,max_ele + 1):
+            countArr[i] += countArr[i-1]
+        # initialize output array
+        outputHeights = [0] * n
+        outputNames = [0] * n
+        # build the output array
+        i = n - 1
+        while i >= 0:
+            outputHeights[countArr[heights[i]] - 1] = heights[i]
+            outputNames[countArr[heights[i]] - 1] = names[i]
+            countArr[heights[i]] -= 1
+            i -= 1
+        return outputNames[::-1]
+print(sortPeopleCount(names = ["Mary","John","Emma"], heights = [180,165,170]))
