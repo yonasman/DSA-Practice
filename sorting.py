@@ -1466,4 +1466,32 @@ def K_th_largest_count(nums,k):
         output[position] = nums[i]
         count[nums[i]] -= 1
     return output[::-1][k-1]
-# print(K_th_largest_count(nums = [3,2,1,5,6,4], k = 2))0
+# print(K_th_largest_count(nums = [3,2,1,5,6,4], k = 2))
+def smallestNumThanCurrent(nums):
+    n = len(nums)
+    output = []
+    for i in range(n):
+        greaterCount = 0
+        for j in range(i+1,n):
+            if nums[i] > nums[j]:
+                greaterCount += 1
+        output.append(greaterCount)
+    return output
+# print(smallestNumThanCurrent([5, 2, 6, 1,5,6,7,1]))
+def anagramIndex(s,p):
+    n = len(s)
+    left = 0
+    right = 1
+    output = []
+    while right < n:
+        subStr = sorted(s[left:right])
+        sortedSubStr = ''.join(subStr)
+        print(sortedSubStr)
+        if sortedSubStr in p:
+            right += 1
+        else:
+            left += 1
+        if len(sortedSubStr) == 3 and sortedSubStr in p:
+            output.append(left)
+    return output
+# print(anagramIndex(s = "cbaebabacd", p = "abc"))
