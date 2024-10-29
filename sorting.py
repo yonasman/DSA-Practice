@@ -1404,3 +1404,28 @@ def heightChecker(heights):
             numOfUnequalIndices += 1
     return numOfUnequalIndices
 # print(heightChecker([1,1,4,2,1,3]))
+def maxGapCounting(nums):
+    n = len(nums)
+    max_num = max(nums)
+    count = [0] * (max_num + 1)
+    # build the count array
+    for num in nums:
+        count[num] += 1
+    # build the cumulative sum
+    for i in range(1,max_num + 1):
+        count[i] += count[i - 1]
+    # output array
+    sortedNums = [0] * n
+    i = n - 1
+    while i >= 0:
+        position = count[nums[i]] - 1
+        sortedNums[position] = nums[i]
+        count[nums[i]] -= 1
+        i -= 1
+    # find the maximum gap
+    print(sortedNums)
+    max_gap = 0
+    for i in range(1,n):
+        max_gap = max(sortedNums[i] - sortedNums[i-1],max_gap)
+    return max_gap
+# print(maxGapCounting([3,6,9,1,15]))
