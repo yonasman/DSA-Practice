@@ -1358,4 +1358,49 @@ def sortPeopleCount(names, heights):
             countArr[heights[i]] -= 1
             i -= 1
         return outputNames[::-1]
-print(sortPeopleCount(names = ["Mary","John","Emma"], heights = [180,165,170]))
+# print(sortPeopleCount(names = ["Mary","John","Emma"], heights = [180,165,170]))
+# problem 1(Sort colors)
+def sortColors(nums):
+    n = len(nums)
+    max_ele = max(nums)
+    count = [0] * (max_ele + 1)
+    # store the freq of elements in the count arr
+    for num in nums:
+        count[num] += 1
+    # build the cumulative sum
+    for i in range(1,max_ele + 1):
+        count[i] += count[i - 1]
+    # output array
+    output = [0] * n
+    for j in range(n - 1,-1,-1):
+        position = count[nums[j]] - 1
+        output[position] = nums[j]
+        count[nums[j]] -= 1
+    return output
+# print(sortColors([2,0,2,1,1,0]))
+def heightChecker(heights):
+    n = len(heights)
+    max_ele = max(heights)
+        
+    # initialize count array
+    count = [0] * (max_ele + 1)
+    # store freq of ele in count array
+    for h in heights:
+        count[h] += 1
+    # build the cumulative count sum
+    for i in range(1,max_ele + 1):
+        count[i] += count[i-1]
+    # build the output array
+    sortedHeights = [0] * n
+        
+    for i in range(n - 1,-1,-1):
+        position = count[heights[i]] - 1
+        sortedHeights[position] = heights[i]
+        count[heights[i]] -= 1
+    # checking for the correct order
+    numOfUnequalIndices = 0
+    for i in range(n):
+        if heights[i] != sortedHeights[i]:
+            numOfUnequalIndices += 1
+    return numOfUnequalIndices
+# print(heightChecker([1,1,4,2,1,3]))
