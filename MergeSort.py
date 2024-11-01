@@ -30,3 +30,38 @@ def merge_sort(nums):
     return merge(left_half, right_half)
 
 # print(merge_sort([1,5,2,9,8]))
+# descending merge sort
+def descending_merge(left, right):
+    pass
+
+def descend_merge_sort(nums):
+    n = len(nums)
+    if n <= 1:
+        return nums
+    # split into 2 using middle index
+    mid = n // 2
+    left_half = descend_merge_sort(nums[:mid])
+    right_half = descend_merge_sort(nums[mid:])
+    # return the sorted and merged array
+    return descending_merge(left_half, right_half)
+
+def descending_merge(left_half, right_half):
+    sorted_array = []
+    i = j = 0
+    while i < len(left_half) and j < len(right_half):
+        if left_half[i] > right_half[j]:
+            sorted_array.append(left_half[i])
+            i += 1
+        else:
+            sorted_array.append(right_half[j])
+            j += 1
+    while i < len(left_half):
+        sorted_array.append(left_half[i])
+        i += 1
+        
+    while j < len(right_half):
+        sorted_array.append(right_half[j])
+        j += 1
+    return sorted_array
+print(descend_merge_sort([1,4,5,2,7,3]))
+            
