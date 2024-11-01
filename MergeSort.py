@@ -29,11 +29,8 @@ def merge_sort(nums):
     # return merged array
     return merge(left_half, right_half)
 
-# print(merge_sort([1,5,2,9,8]))
+# print(merge_sort([1, 20, 6, 4, 5]))
 # descending merge sort
-def descending_merge(left, right):
-    pass
-
 def descend_merge_sort(nums):
     n = len(nums)
     if n <= 1:
@@ -63,5 +60,32 @@ def descending_merge(left_half, right_half):
         sorted_array.append(right_half[j])
         j += 1
     return sorted_array
-print(descend_merge_sort([1,4,5,2,7,3]))
+# print(descend_merge_sort([1,4,5,2,7,3]))
+#merge a sorted array
+def merger(arr1, arr2):
+    n = len(arr1)
+    m = len(arr2)
+    i = j = 0
+    mergedArray = []
+    
+    while i < n and j < m:
+        if arr1[i] < arr2[j]:
+            mergedArray.append(arr1[i])
+            i += 1
+        else:
+            mergedArray.append(arr2[j])
+            j += 1
+        # [1, 4, 7] and [2, 5, 6]
+    # append the remaining elements
+    # mergedArray.extend(arr1[i:])
+    # mergedArray.extend(arr2[j:])
+    # or
+    while i < n:
+        mergedArray.append(arr1[i])
+        i += 1
+    while j < n:
+        mergedArray.append(arr2[j])
+        j += 1
+    return mergedArray
+# print(merger([1,4,7],[2,5,6]))
             
