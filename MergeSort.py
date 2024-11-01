@@ -88,4 +88,38 @@ def merger(arr1, arr2):
         j += 1
     return mergedArray
 # print(merger([1,4,7],[2,5,6]))
-            
+
+# count number of inversions
+def inversion_merge(left_half, right_half):
+    sorted_arr = []
+    i = j = 0
+    inversion_count = 0
+    
+    while i < len(left_half) and j < len(right_half):
+        if left_half[i] < right_half[j]:
+            sorted_arr.append(left_half[i])
+            i += 1
+        else:
+            sorted_arr.append(right_half[j])
+            inversion_count += len(left_half[i:])
+            j += 1
+    # append the remaining elements
+    sorted_arr.extend(left_half[i:])
+    sorted_arr.extend(right_half[j:])
+    
+    return sorted_arr, inversion_count
+
+def merge_sort_inversion(nums):
+    n = len(nums)
+    # if contains at most 1 element
+    if n <= 1:
+        return nums, 0
+    mid = n // 2
+    left,left_inversion_count = merge_sort_inversion(nums[:mid])
+    right, right_inversion_count = merge_sort_inversion(nums[mid:])
+    # merge and count split inversions
+    merged, split_inversions = inversion_merge(left,right)
+    
+    total_inversions = left_inversion_count + right_inversion_count + split_inversions
+    return merged, total_inversions
+# print(merge_sort_inversion([1, 20, 6, 4, 5]))
