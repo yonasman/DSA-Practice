@@ -253,3 +253,20 @@ def longestConsecutive(nums):
             maxLength = max(maxLength, length)
     return maxLength
 # print(longestConsecutive([100, 4, 200, 1, 3, 2]))
+# longest non-repeating substring
+def longest_substr(s):
+    n = len(s)
+    left = 0
+    char_set = set()
+    max_substr = 0
+    
+    for right in range(n):
+        # if char is repeated shrink the window
+        while s[right] in char_set:
+            char_set.remove(s[left])
+            left += 1
+        # otherwise
+        char_set.add(s[right])
+        max_substr = max(max_substr, right - left + 1)
+    return max_substr
+# print(longest_substr("abccabcbb"))
