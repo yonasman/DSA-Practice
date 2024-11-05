@@ -270,3 +270,40 @@ def longest_substr(s):
         max_substr = max(max_substr, right - left + 1)
     return max_substr
 # print(longest_substr("abccabcbb"))
+def max_subArray(nums):
+    current_sum = 0
+    max_sum = 0
+    
+    for num in nums:
+        current_sum = max(num, current_sum + num)
+        max_sum = max(max_sum, current_sum)
+    return max_sum
+# print(max_subArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
+# two numbers that adds up to target
+def twoSum(nums,target):
+    num_to_index = {}
+    
+    for i,num in enumerate(nums):
+        complement = target - num       
+        if complement in num_to_index:
+            return [num_to_index[complement],i]
+        # add the num to hashmap
+        num_to_index[num] = i
+# print(twoSum([2, 7, 11, 15],9))
+# product of array except self
+def except_self(nums):
+    n = len(nums)
+    result = [1] * n
+    
+    # left product
+    left_product = 1
+    for i in range(n):
+        result[i] = left_product
+        left_product *= nums[i]
+    #right product
+    right_product = 1
+    for j in range(n - 1,-1,-1):
+        result[j] = right_product
+        right_product *= nums[j]
+    return result
+# print(except_self([1, 2, 3, 4]))
