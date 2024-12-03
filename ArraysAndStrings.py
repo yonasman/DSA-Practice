@@ -307,3 +307,19 @@ def except_self(nums):
         right_product *= nums[j]
     return result
 # print(except_self([1, 2, 3, 4]))
+def twoSum3(nums,target):
+    n = len(nums)
+    left,right = 0,1
+    
+    while left < n:
+        if nums[left] + nums[right] == target:
+            return [left,right]
+        right += 1
+        # if right reached the end
+        if right == n:
+            left += 1
+            right = left + 1
+        # if left reached n - 1 no solution possible
+        if left == n - 1:
+            return []
+print(twoSum3(nums = [2, 11, 15,7], target = 9))
