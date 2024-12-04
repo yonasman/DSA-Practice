@@ -746,4 +746,12 @@ def GCF1(num1,num2):
 ans = 5 
 for i in range(1): 
          ans *= 5
-print(ans)
+# print(ans)
+# problem: finding the maximum element
+def max_ele(nums):
+    max_ele = nums[0]
+    for num in nums:
+        if num > max_ele:
+            max_ele = num
+    return max_ele
+print(max_ele([3, 1, 4, 1, 5, 9, 2]))
