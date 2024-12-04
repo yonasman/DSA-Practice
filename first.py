@@ -754,4 +754,16 @@ def max_ele(nums):
         if num > max_ele:
             max_ele = num
     return max_ele
-print(max_ele([3, 1, 4, 1, 5, 9, 2]))
+# print(max_ele([3, 1, 4, 1, 5, 9, 2]))
+# problem: reverse a string
+def reverse_str_1(s):
+    return s[::-1]
+# print(reverse_str_1("Hello"))
+def reverse_str_2(s):
+    reversed_str = ''
+    n = len(s) - 1
+    while n >= 0:
+        reversed_str += s[n]
+        n -= 1
+    return reversed_str
+# print(reverse_str_2("hello"))
