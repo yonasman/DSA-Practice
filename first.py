@@ -767,3 +767,11 @@ def reverse_str_2(s):
         n -= 1
     return reversed_str
 # print(reverse_str_2("hello"))
+def is_prime(num):
+    if num <= 1:
+        return False
+    for i in range(2,int(math.sqrt(7) + 1)):
+        if num % i == 0:
+            return False
+    return True
+print(is_prime(7))
